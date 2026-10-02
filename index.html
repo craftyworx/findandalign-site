@@ -6,40 +6,56 @@
 <title>Find & Align</title>
 
 <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
+<link href="https://db.onlinewebfonts.com/c/485cb942b643ee12f399edad1714b47e?family=TRY+Tosh+B+Medium" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+
 body {
   margin: 0;
   font-family: "TRY Tosh A", Arial, sans-serif;
   background: #f7f7f7;
   color: #111;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* HERO */
 .hero {
   height: 100vh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  padding: 0 24px;
 }
 
 .logo img {
   width: 260px;
+  max-width: 70vw;
+  height: auto;
   opacity: 0;
 }
 
 .tagline {
-  margin-top: 20px;
+  margin-top: 26px;
   font-size: 16px;
+  letter-spacing: 0.02em;
+  text-align: center;
   opacity: 0;
 }
 
 /* SCROLL INDICATOR */
 .scroll-indicator {
   position: absolute;
-  bottom: 40px;
+  bottom: max(40px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
   width: 22px;
   height: 36px;
   border: 1px solid #bbb;
@@ -61,20 +77,15 @@ body {
 }
 
 @keyframes scroll {
-  0% {opacity: 0; transform: translate(-50%,0);}
-  50% {opacity: 1;}
-  100% {opacity: 0; transform: translate(-50%,10px);}
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
 }
 
-/* DIVIDER SECTION */
+/* DIVIDER SECTION — pinned, lines reveal one by one */
 .divider-section {
-  height: 300vh;
-}
-
-.divider-inner {
-  position: sticky;
-  top: 0;
   height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,94 +96,181 @@ body {
   max-width: 900px;
 }
 
-.line {
-  margin: 60px 0;
-}
+.line { margin: 0; }
+.line + .line { margin-top: clamp(48px, 7vh, 72px); }
 
 .line-text {
-  font-size: 32px;
-  margin-bottom: 14px;
-  color: #dcdcdc;
-  transition: color 0.2s linear;
+  font-size: clamp(21px, 2.6vw, 32px);
+  line-height: 1.35;
+  margin-bottom: 18px;
+  color: #d9d9d9;
 }
 
 .line-bar {
   height: 1px;
   background: #e5e5e5;
-  overflow: hidden;
 }
 
 .line-fill {
   height: 100%;
-  width: 0%;
+  width: 100%;
   background: #111;
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 /* BLOCK TEXT */
 .block-section {
-  padding: 160px 20px;
+  padding: clamp(120px, 18vh, 180px) 24px;
   text-align: center;
 }
 
 .block-text {
   max-width: 850px;
   margin: auto;
-  font-size: 30px;
+  font-size: clamp(22px, 2.4vw, 30px);
   font-weight: 500;
   line-height: 1.6;
 }
 
+.block-text .word { opacity: 0.08; }
+
 /* FINAL */
 .final-section {
-  padding: 140px 20px;
-  max-width: 900px;
+  padding: clamp(100px, 16vh, 160px) 24px clamp(80px, 12vh, 120px);
+  max-width: 760px;
   margin: 0 auto;
+  text-align: center;
 }
 
-/* each line */
 .final-line {
-  font-size: 22px;
-  margin: 28px 0;
-  opacity: 0.3;
-  text-align: right;   /* 👈 key fix */
-  line-height: 1.6;
+  margin: 0;
+  line-height: 1.55;
+  color: #111;
 }
 
-/* spacing between lines (clean rhythm) */
-.final-line:nth-child(2) {
-  margin-top: 40px;
+.final-line--statement {
+  font-family: "TRY Tosh B Medium", "TRY Tosh A", Arial, sans-serif;
+  font-size: clamp(24px, 2.6vw, 30px);
 }
 
-.final-line:nth-child(3) {
-  margin-top: 40px;
+.final-line--body {
+  font-size: clamp(16px, 1.6vw, 19px);
+  color: #444;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.final-line + .final-line { margin-top: clamp(44px, 6vh, 60px); }
+
+.final-line .word { opacity: 0; transform: translateY(8px); display: inline-block; }
+
 /* FORM */
 .form {
-  margin-top: 60px;
+  margin-top: clamp(72px, 10vh, 96px);
 }
 
-input {
+.form-note {
+  font-size: 15px;
+  color: #555;
+  margin: 0 0 34px;
+  opacity: 0;
+}
+
+.form-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 28px;
+  opacity: 0;
+}
+
+.form input {
   border: none;
   border-bottom: 1px solid #aaa;
-  padding: 10px;
-  width: 240px;
+  padding: 12px 4px;
+  width: 260px;
+  max-width: 100%;
   background: transparent;
   font-family: inherit;
+  font-size: 15px;
+  color: #111;
+  outline: none;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
 }
 
-button {
+.form input::placeholder { color: #999; }
+.form input:focus { border-bottom-color: #111; }
+
+.form button {
   border: none;
   border-bottom: 1px solid #111;
   background: transparent;
-  margin-left: 20px;
+  padding: 12px 2px;
+  min-height: 44px;
   cursor: pointer;
   font-family: inherit;
+  font-size: 15px;
+  color: #111;
+  position: relative;
+  transition: opacity 0.25s ease;
+}
+
+.form button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: #111;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
+}
+
+.form button:hover::after,
+.form button:focus-visible::after { transform: scaleX(1); }
+
+.form-success {
+  display: none;
+  font-size: 16px;
+  color: #111;
+  margin: 0;
 }
 
 .footer {
-  margin-top: 60px;
+  margin-top: clamp(72px, 10vh, 100px);
   font-size: 12px;
-  opacity: 0.4;
+  letter-spacing: 0.04em;
+  color: #999;
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .divider-content { width: 84%; }
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .form input { width: 100%; text-align: center; }
+  .form button { width: 100%; border-bottom-color: #111; }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .logo img, .tagline, .scroll-indicator { opacity: 1 !important; }
+  .line-text { color: #111 !important; }
+  .line-fill { transform: scaleX(1) !important; }
+  .block-text .word, .final-line .word { opacity: 1 !important; transform: none !important; }
+  .form-note, .form-row { opacity: 1 !important; }
+  .scroll-indicator::after { animation: none; }
 }
 </style>
 </head>
@@ -182,7 +280,7 @@ button {
 <!-- HERO -->
 <section class="hero">
   <div class="logo">
-    <img src="logo.png" />
+    <img src="logo.png" alt="findandalign" />
   </div>
   <div class="tagline">Symbolic Intelligence for Alignment</div>
   <div class="scroll-indicator"></div>
@@ -190,25 +288,23 @@ button {
 
 <!-- DIVIDER -->
 <section class="divider-section">
-  <div class="divider-inner">
-    <div class="divider-content">
+  <div class="divider-content">
 
-      <div class="line">
-        <div class="line-text">Most people never see how they actually operate.</div>
-        <div class="line-bar"><div class="line-fill"></div></div>
-      </div>
-
-      <div class="line">
-        <div class="line-text">Not their patterns. Not their contradictions.</div>
-        <div class="line-bar"><div class="line-fill"></div></div>
-      </div>
-
-      <div class="line">
-        <div class="line-text">Not the forces quietly shaping their decisions.</div>
-        <div class="line-bar"><div class="line-fill"></div></div>
-      </div>
-
+    <div class="line">
+      <div class="line-text">Most people never see how they actually operate.</div>
+      <div class="line-bar"><div class="line-fill"></div></div>
     </div>
+
+    <div class="line">
+      <div class="line-text">Not their patterns. Not their contradictions.</div>
+      <div class="line-bar"><div class="line-fill"></div></div>
+    </div>
+
+    <div class="line">
+      <div class="line-text">Not the forces quietly shaping their decisions.</div>
+      <div class="line-bar"><div class="line-fill"></div></div>
+    </div>
+
   </div>
 </section>
 
@@ -222,18 +318,21 @@ button {
 <!-- FINAL -->
 <section class="final-section">
 
-  <div class="final-line split">It doesn’t define you.</div>
+  <div class="final-line final-line--statement split">It doesn’t define you.</div>
 
-  <div class="final-line split">
+  <div class="final-line final-line--body split">
     It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.
   </div>
 
-  <div class="final-line split">This is not for everyone.</div>
+  <div class="final-line final-line--statement split">This is not for everyone.</div>
 
   <div class="form">
-    <p>Early access is limited to a small group.</p>
-    <input placeholder="Enter your email"/>
-    <button>Request Access</button>
+    <p class="form-note">Early access is limited to a small group.</p>
+    <div class="form-row">
+      <input type="email" placeholder="Enter your email" aria-label="Email address"/>
+      <button type="button">Request Access</button>
+    </div>
+    <p class="form-success">Thank you — we’ll be in touch.</p>
   </div>
 
   <div class="footer">in development — 2026</div>
@@ -248,70 +347,125 @@ button {
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* SMOOTH SCROLL */
-const lenis = new Lenis({ lerp: 0.06 });
+const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((t) => lenis.raf(t * 1000));
-gsap.ticker.lagSmoothing(0);
+if (!prefersReduced) {
 
-/* HERO ANIMATION */
-gsap.to(".logo img", { opacity: 1, y: -10, duration: 1 });
-gsap.to(".tagline", { opacity: 0.6, delay: 0.3 });
-gsap.to(".scroll-indicator", { opacity: 1, delay: 0.8 });
+  /* SMOOTH SCROLL */
+  const lenis = new Lenis({ lerp: 0.09 });
 
-/* DIVIDER (FIXED SMOOTH) */
-document.querySelectorAll(".line").forEach(line => {
-  const fill = line.querySelector(".line-fill");
-  const text = line.querySelector(".line-text");
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
 
-  gsap.to(fill, {
-    width: "100%",
-    ease: "none",
+  /* HERO ANIMATION */
+  gsap.fromTo(".logo img",
+    { opacity: 0, y: 12 },
+    { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
+  gsap.to(".tagline", { opacity: 0.65, duration: 1, delay: 0.4, ease: "power2.out" });
+  gsap.to(".scroll-indicator", { opacity: 1, duration: 0.8, delay: 0.9 });
+
+  /* DIVIDER — one pinned timeline, lines reveal one by one */
+  const dividerTl = gsap.timeline({
     scrollTrigger: {
-      trigger: line,
-      start: "top 65%",
-      end: "top 25%",
-      scrub: true
+      trigger: ".divider-section",
+      start: "top top",
+      end: "+=280%",
+      scrub: 0.6,
+      pin: true,
+      anticipatePin: 1
     }
   });
 
-  gsap.to(text, {
-    color: "#111",
-    ease: "none",
-    scrollTrigger: {
-      trigger: line,
-      start: "top 65%",
-      end: "top 25%",
-      scrub: true
-    }
-  });
-});
+  document.querySelectorAll(".line").forEach((line) => {
+    const text = line.querySelector(".line-text");
+    const fill = line.querySelector(".line-fill");
 
-/* WORD SPLIT */
-function splitWords(el) {
-  const words = el.innerText.split(" ");
-  el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
-  return el.querySelectorAll(".word");
+    dividerTl
+      .to(text, { color: "#111", duration: 1, ease: "none" })
+      .to(fill, { scaleX: 1, duration: 0.8, ease: "none" }, "-=0.35")
+      .to({}, { duration: 0.55 }); // reading pause before the next line
+  });
+
+  /* WORD SPLIT */
+  function splitWords(el) {
+    const words = el.innerText.trim().split(/\s+/);
+    el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+    return el.querySelectorAll(".word");
+  }
+
+  /* BLOCK — dramatic scrub reveal, fully resolves to dark */
+  document.querySelectorAll(".block-text.split").forEach(el => {
+    const words = splitWords(el);
+
+    gsap.to(words, {
+      opacity: 1,
+      stagger: 0.08,
+      ease: "none",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 82%",
+        end: "top 30%",
+        scrub: 0.5
+      }
+    });
+  });
+
+  /* FINAL — calm, settles fully: each line reveals once, in order */
+  document.querySelectorAll(".final-line.split").forEach(el => {
+    const words = splitWords(el);
+
+    gsap.to(words, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      stagger: 0.045,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 82%",
+        toggleActions: "play none none none"
+      }
+    });
+  });
+
+  /* FORM reveal */
+  gsap.to(".form-note", {
+    opacity: 1, duration: 0.8, ease: "power2.out",
+    scrollTrigger: { trigger: ".form", start: "top 85%", toggleActions: "play none none none" }
+  });
+  gsap.fromTo(".form-row",
+    { opacity: 0, y: 14 },
+    { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: "power2.out",
+      scrollTrigger: { trigger: ".form", start: "top 85%", toggleActions: "play none none none" } });
+
+} else {
+  /* Reduced motion: everything visible, no smooth-scroll hijack */
+  gsap.set(".form-row", { opacity: 1 });
 }
 
-/* WORD REVEAL (SMOOTH + SLOW) */
-document.querySelectorAll(".split").forEach(el => {
-  const words = splitWords(el);
+/* FORM behaviour */
+const formRow = document.querySelector(".form-row");
+const input = formRow.querySelector("input");
+const button = formRow.querySelector("button");
 
-  gsap.set(words, { opacity: 0.05 });
+button.addEventListener("click", () => {
+  const value = input.value.trim();
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  if (!valid) {
+    gsap.fromTo(input, { x: -6 }, { x: 0, duration: 0.4, ease: "elastic.out(1, 0.35)" });
+    input.focus();
+    return;
+  }
+  formRow.style.display = "none";
+  document.querySelector(".form-note").style.display = "none";
+  const success = document.querySelector(".form-success");
+  success.style.display = "block";
+  gsap.fromTo(success, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+});
 
-  gsap.to(words, {
-    opacity: 1,
-    stagger: 0.08,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: el,
-      start: "top 80%",
-      end: "top 40%",
-      scrub: true
-    }
-  });
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") button.click();
 });
 </script>
 
