@@ -1,248 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Find & Align</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Find & Align</title>
 
-  <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
+<link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      background: #ffffff;
-      color: #111;
-      font-family: "TRY Tosh A", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-    }
+body {
+  margin: 0;
+  font-family: "TRY Tosh A", Arial, sans-serif;
+  background: #fff;
+  color: #111;
+}
 
-    .wrapper {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 100px 24px 80px;
-    }
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    .container {
-      width: 100%;
-      max-width: 720px;
-    }
+.logo img {
+  max-width: 320px;
+  width: 80%;
+}
 
-    /* Logo */
-    .logo {
-      text-align: center;
-      margin-bottom: 80px;
-      opacity: 0;
-      animation: fadeLogo 1s ease forwards;
-    }
+.tagline {
+  margin-top: 20px;
+  font-size: 16px;
+  opacity: 0.7;
+  text-align: center;
+  max-width: 320px;
+}
 
-    .logo img {
-      max-width: 100%;
-      height: auto;
-    }
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  text-align: center;
+  opacity: 0.4;
+  animation: bounce 2s infinite;
+}
 
-    /* Heading */
-    .heading {
-      text-align: center;
-      margin-bottom: 60px;
-      opacity: 0;
-      animation: fadeText 1s ease forwards;
-      animation-delay: 0.6s;
-    }
+.scroll-indicator span {
+  display: block;
+  font-size: 18px;
+  line-height: 10px;
+}
 
-    h1 {
-      font-size: 24px;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      margin: 0;
-    }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
 
-    /* Text block */
-    .text-block {
-      max-width: 520px;
-      margin: 0 auto;
-      text-align: left;
-      opacity: 0;
-      animation: fadeText 1.2s ease forwards;
-      animation-delay: 1.2s;
-    }
+/* SECTION */
+.section {
+  padding: 120px 24px;
+  max-width: 700px;
+  margin: auto;
+}
 
-    .line {
-      font-size: 15px;
-      line-height: 1.8;
-      margin-bottom: 14px;
-      opacity: 0.8;
-    }
+/* Divider lines */
+.line-block {
+  margin-bottom: 50px;
+}
 
-    .line.soft {
-      opacity: 0.5;
-    }
+.line {
+  border-top: 1px solid #ddd;
+  padding: 14px 0;
+  font-size: 15px;
+  color: #999;
+  transition: all 0.6s ease;
+}
 
-    .line.strong {
-      opacity: 1;
-    }
+.line.active {
+  border-color: #111;
+  color: #111;
+}
 
-    /* Access line */
-    .access {
-      margin-top: 50px;
-      font-size: 13px;
-      opacity: 0.5;
-      text-align: center;
-    }
+/* Big text break */
+.big-text {
+  font-size: 26px;
+  line-height: 1.4;
+  margin: 100px 0;
+  color: #333;
+}
 
-    /* Form */
-    .form {
-      margin-top: 14px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+/* Form */
+.form-section {
+  text-align: center;
+  margin-top: 80px;
+}
 
-    input {
-      border: none;
-      border-bottom: 1px solid #ccc;
-      padding: 10px 4px;
-      font-size: 14px;
-      width: 220px;
-      outline: none;
-      background: transparent;
-    }
+.access {
+  font-size: 13px;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
 
-    input:focus {
-      border-color: #111;
-    }
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-    button {
-      border: none;
-      background: none;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 10px 4px;
-      border-bottom: 1px solid #111;
-    }
+input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 4px;
+  font-size: 14px;
+  width: 220px;
+  outline: none;
+}
 
-    button:hover {
-      opacity: 0.6;
-    }
+button {
+  border: none;
+  background: none;
+  border-bottom: 1px solid #111;
+  padding: 10px 4px;
+  cursor: pointer;
+}
 
-    .footer {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 11px;
-      opacity: 0.3;
-      letter-spacing: 1px;
-    }
+.footer {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 11px;
+  opacity: 0.3;
+}
 
-    /* Animations */
-    @keyframes fadeLogo {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeText {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Mobile */
-    @media (max-width: 600px) {
-      .wrapper {
-        padding: 120px 28px 60px;
-      }
-
-      .text-block {
-        max-width: 100%;
-      }
-
-      .line {
-        font-size: 14px;
-      }
-
-      input {
-        width: 100%;
-      }
-
-      .form {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      button {
-        text-align: left;
-      }
-    }
-  </style>
+/* Mobile */
+@media (max-width: 600px) {
+  .big-text {
+    font-size: 22px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="wrapper">
-    <div class="container">
-
-      <div class="logo">
-        <img src="logo.png" alt="Find and Align Logo" />
-      </div>
-
-      <div class="heading">
-        <h1>Symbolic Intelligence for Alignment</h1>
-      </div>
-
-      <div class="text-block">
-
-        <div class="line strong">
-          Most people never see how they actually operate.
-        </div>
-
-        <div class="line">
-          Not their patterns. Not their contradictions.
-        </div>
-
-        <div class="line soft">
-          Not the forces quietly shaping their decisions.
-        </div>
-
-        <div class="line" style="margin-top: 20px;">
-          This system maps the underlying structure of how you think, react, and move through life —
-          with a level of precision most people aren’t ready for.
-        </div>
-
-        <div class="line" style="margin-top: 20px;">
-          It doesn’t define you.
-        </div>
-
-        <div class="line">
-          It shows you where you’re misaligned, what’s driving it,
-        </div>
-
-        <div class="line">
-          and what changes when you become aware of it.
-        </div>
-
-        <div class="line strong" style="margin-top: 20px;">
-          This is not for everyone.
-        </div>
-
-      </div>
-
-      <div class="access">
-        Early access is limited to a small group.
-      </div>
-
-      <form class="form">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit">Request Access</button>
-      </form>
-
-      <div class="footer">
-        in development — 2026
-      </div>
-
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="logo">
+    <img src="logo.png" alt="logo">
   </div>
+
+  <div class="tagline">
+    Symbolic Intelligence for Alignment
+  </div>
+
+  <div class="scroll-indicator">
+    <span>⌄</span>
+    <span>⌄</span>
+    <span>⌄</span>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section">
+
+  <div class="line-block">
+    <div class="line">Most people never see how they actually operate.</div>
+    <div class="line">Not their patterns. Not their contradictions.</div>
+    <div class="line">Not the forces quietly shaping their decisions.</div>
+  </div>
+
+  <div class="big-text">
+    This system maps the underlying structure of how you think, react, and move through life — 
+    with a level of precision most people aren’t ready for.
+  </div>
+
+  <div class="line-block">
+    <div class="line">It doesn’t define you.</div>
+    <div class="line">It shows you where you’re misaligned, what’s driving it,</div>
+    <div class="line">and what changes when you become aware of it.</div>
+    <div class="line">This is not for everyone.</div>
+  </div>
+
+  <div class="form-section">
+    <div class="access">Early access is limited to a small group.</div>
+
+    <form class="form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Request Access</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    in development — 2026
+  </div>
+
+</section>
+
+<script>
+const lines = document.querySelectorAll('.line');
+
+function revealLines() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  lines.forEach(line => {
+    const rect = line.getBoundingClientRect().top;
+
+    if(rect < triggerBottom) {
+      line.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', revealLines);
+revealLines();
+</script>
 
 </body>
 </html>
