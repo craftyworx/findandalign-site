@@ -3,28 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Find & Align - A Symbolic Behavioral Intelligence System </title>
+  <title>Find & Align</title>
 
   <!-- Font -->
   <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background: #ffffff;
       color: #111;
       font-family: "TRY Tosh A", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    }
+
+    /* Layout wrapper */
+    .wrapper {
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      text-align: center;
+      padding: 40px 20px;
     }
 
     /* Container */
     .container {
+      width: 100%;
       max-width: 640px;
-      padding: 60px 24px;
+      text-align: center;
       animation: fadeIn 0.8s ease forwards;
     }
 
@@ -36,13 +45,15 @@
     .logo img {
       display: block;
       margin: 0 auto;
+      max-width: 100%;
+      height: auto;
     }
 
     /* Heading */
     h1 {
       font-size: 26px;
       font-weight: 400;
-      margin-bottom: 24px;
+      margin: 0 0 24px;
       letter-spacing: 0.5px;
     }
 
@@ -51,8 +62,8 @@
       font-size: 15px;
       line-height: 1.7;
       opacity: 0.65;
-      max-width: 520px;
       margin: 0 auto;
+      max-width: 520px;
     }
 
     /* Footer */
@@ -67,7 +78,7 @@
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
@@ -75,10 +86,12 @@
       }
     }
 
-    /* Mobile */
+    /* 📱 Mobile */
     @media (max-width: 600px) {
-      .container {
-        padding: 40px 20px;
+
+      .wrapper {
+        padding: 30px 16px;
+        align-items: flex-start; /* important fix */
       }
 
       .logo {
@@ -102,24 +115,28 @@
 </head>
 
 <body>
-  <div class="container">
 
-    <div class="logo">
-      <img src="logo.png" alt="Find and Align Logo" />
+  <div class="wrapper">
+    <div class="container">
+
+      <div class="logo">
+        <img src="logo.png" alt="Find and Align Logo" />
+      </div>
+
+      <h1>Symbolic Intelligence for Alignment</h1>
+
+      <p>
+        A system for reading and interpreting the underlying structure of human experience.
+        It maps patterns across perception, identity, and behavior — not to define you,
+        but to reveal how you operate, where you’re misaligned, and what naturally aligns.
+      </p>
+
+      <div class="footer">
+        in development — 2026
+      </div>
+
     </div>
-
-    <h1>Symbolic Intelligence for Alignment</h1>
-
-    <p>
-      A system for reading and interpreting the underlying structure of human experience.
-      It maps patterns across perception, identity, and behavior — not to define you,
-      but to reveal how you operate, where you’re misaligned, and what naturally aligns.
-    </p>
-
-    <div class="footer">
-      in development — 2026
-    </div>
-
   </div>
+
 </body>
 </html>
