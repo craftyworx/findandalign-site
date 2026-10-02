@@ -7,8 +7,12 @@
 
 <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
+<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
 <style>
 body {
@@ -16,15 +20,27 @@ body {
   background: #fff;
   color: #111;
   font-family: "TRY Tosh A", Arial, sans-serif;
+  cursor: none;
+}
+
+/* CURSOR */
+.cursor {
+  width: 8px;
+  height: 8px;
+  background: #111;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
 }
 
 /* HERO */
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .logo img {
   width: 260px;
@@ -32,12 +48,12 @@ body {
 .tagline {
   margin-top: 20px;
   font-size: 18px;
-  font-weight: 500;
+  opacity: 0.7;
 }
 
-/* STICKY SECTION */
-.sticky-wrapper {
-  height: 300vh;
+/* SECTION */
+.section {
+  height: 400vh;
   position: relative;
 }
 
@@ -50,127 +66,107 @@ body {
 }
 
 .content {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
-  width: 100%;
   padding: 0 24px;
 }
 
 /* LINES */
-.line-block {
-  margin-bottom: 40px;
+.line {
+  font-size: 34px;
+  margin: 40px 0;
+  color: #aaa;
+  position: relative;
 }
 
-.line {
-  position: relative;
-  font-size: 28px;
-  margin: 28px 0;
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: #ddd;
+  margin-top: 12px;
   overflow: hidden;
 }
-
-/* text mask */
-.line span {
-  display: inline-block;
-  transform: translateX(-100%);
-}
-
-/* divider */
-.line::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  height: 1px;
+.divider-fill {
+  height: 100%;
   width: 0%;
   background: #111;
 }
 
-.line::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  height: 1px;
-  width: 100%;
-  background: #ddd;
+/* WORDS */
+.word {
+  opacity: 0.2;
 }
 
 /* BIG TEXT */
 .big-text {
   margin-top: 120px;
-  font-size: 34px;
+  font-size: 38px;
   line-height: 1.5;
   font-weight: 600;
-  max-width: 700px;
+  opacity: 0;
 }
 
 /* FORM */
 .form-block {
   margin-top: 120px;
+  opacity: 0;
 }
-
 .form {
   display: flex;
   gap: 10px;
   margin-top: 20px;
 }
-
 input {
   border: none;
   border-bottom: 1px solid #ccc;
   padding: 10px;
   width: 240px;
-  font-family: inherit;
 }
-
 button {
-  background: none;
   border: none;
   border-bottom: 1px solid #111;
-  cursor: pointer;
+  background: none;
   padding: 10px;
+  cursor: pointer;
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .line {
-    font-size: 22px;
-  }
-
-  .big-text {
-    font-size: 22px;
-  }
-
-  .form {
-    flex-direction: column;
-  }
-
-  input {
-    width: 100%;
-  }
+@media(max-width:768px){
+  .line { font-size: 24px; }
+  .big-text { font-size: 24px; }
+  .form { flex-direction: column; }
 }
 </style>
 </head>
 
 <body>
 
+<div class="cursor"></div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="logo">
-    <img src="logo.png" alt="">
-  </div>
+  <div class="logo"><img src="logo.png"></div>
   <div class="tagline">Symbolic Intelligence for Alignment</div>
 </section>
 
-<!-- STICKY SECTION -->
-<section class="sticky-wrapper">
+<!-- EXPERIENCE -->
+<section class="section">
   <div class="sticky">
     <div class="content">
 
-      <div class="line-block">
-        <div class="line"><span>Most people never see how they actually operate.</span></div>
-        <div class="line"><span>Not their patterns. Not their contradictions.</span></div>
-        <div class="line"><span>Not the forces quietly shaping their decisions.</span></div>
+      <div class="line">
+        <span class="text">Most people never see how they actually operate.</span>
+        <div class="divider"><div class="divider-fill"></div></div>
+      </div>
+
+      <div class="line">
+        <span class="text">Not their patterns. Not their contradictions.</span>
+        <div class="divider"><div class="divider-fill"></div></div>
+      </div>
+
+      <div class="line">
+        <span class="text">Not the forces quietly shaping their decisions.</span>
+        <div class="divider"><div class="divider-fill"></div></div>
       </div>
 
       <div class="big-text">
@@ -179,7 +175,6 @@ button {
 
       <div class="form-block">
         <p>Early access is limited to a small group.</p>
-
         <div class="form">
           <input type="email" placeholder="Enter your email">
           <button>Request Access</button>
@@ -193,46 +188,92 @@ button {
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* STICKY TIMELINE */
+/* LENIS */
+const lenis = new Lenis({
+  duration: 1.2,
+  smooth: true
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+/* CURSOR */
+const cursor = document.querySelector(".cursor");
+window.addEventListener("mousemove", e => {
+  gsap.to(cursor, {
+    x: e.clientX,
+    y: e.clientY,
+    duration: 0.2
+  });
+});
+
+/* WORD SPLIT */
+document.querySelectorAll(".text").forEach(el => {
+  const words = el.innerText.split(" ");
+  el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+});
+
+/* TIMELINE */
 const tl = gsap.timeline({
   scrollTrigger: {
-    trigger: ".sticky-wrapper",
+    trigger: ".section",
     start: "top top",
     end: "bottom bottom",
-    scrub: true,
+    scrub: true
   }
 });
 
-/* EACH LINE ANIMATION */
+/* LINES */
 gsap.utils.toArray(".line").forEach((line, i) => {
-  const text = line.querySelector("span");
+  const words = line.querySelectorAll(".word");
+  const fill = line.querySelector(".divider-fill");
 
-  tl.to(text, {
-    x: 0,
-    duration: 1,
+  tl.to(words, {
+    opacity: 1,
+    stagger: 0.05,
+    duration: 1
+  }, i * 1.2);
+
+  tl.to(fill, {
+    width: "100%",
+    duration: 1
   }, i * 1.2);
 
   tl.to(line, {
-    "--fill": "100%"
-  });
-
-  tl.to(line, {
-    duration: 0.5
-  });
+    color: "#111",
+    duration: 0.3
+  }, i * 1.2);
 });
 
-/* DIVIDER FILL */
-gsap.utils.toArray(".line").forEach((line, i) => {
-  gsap.to(line.querySelector("::after"), {});
-});
-
-/* BIG TEXT (minimal, serious) */
-gsap.from(".big-text", {
-  opacity: 0,
-  y: 20,
+/* BIG TEXT */
+gsap.to(".big-text", {
+  opacity: 1,
+  y: -10,
   scrollTrigger: {
     trigger: ".big-text",
     start: "top 80%"
+  }
+});
+
+/* FORM */
+gsap.to(".form-block", {
+  opacity: 1,
+  y: -10,
+  scrollTrigger: {
+    trigger: ".form-block",
+    start: "top 85%"
+  }
+});
+
+/* SUBTLE DRIFT */
+gsap.to(".content", {
+  x: -40,
+  scrollTrigger: {
+    trigger: ".section",
+    scrub: true
   }
 });
 </script>
