@@ -12,6 +12,8 @@
 
 <style>
 
+/* BASE */
+
 body {
   margin: 0;
   font-family: "TRY Tosh A", Arial, sans-serif;
@@ -26,7 +28,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   flex-direction: column;
 }
 
@@ -41,7 +42,7 @@ body {
   font-weight: 500;
 }
 
-/* SCROLL MOUSE */
+/* SCROLL INDICATOR */
 
 .mouse {
   position: absolute;
@@ -69,10 +70,10 @@ body {
   100% { opacity: 0; top: 16px; }
 }
 
-/* SECTION */
+/* CINEMATIC SECTION */
 
 .section {
-  height: 300vh; /* IMPORTANT for scroll */
+  height: 300vh;
   position: relative;
 }
 
@@ -88,68 +89,49 @@ body {
 
 /* CONTENT */
 
-.lines {
+.wrapper {
   width: 70%;
   max-width: 900px;
 }
 
-.line-block {
-  margin-bottom: 40px;
+/* LINE BLOCK */
+
+.block {
+  margin-bottom: 60px;
 }
 
-.line {
+.divider {
   height: 1px;
   background: #ddd;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   overflow: hidden;
 }
 
-.line-fill {
-  height: 100%;
+.fill {
   width: 0%;
+  height: 100%;
   background: #111;
 }
 
 .text {
-  font-size: 28px;
-  color: #999;
-  transition: color 0.3s ease;
+  font-size: 32px;
+  color: #bbb;
+  line-height: 1.4;
 }
 
-.text.active {
-  color: #111;
+/* NEXT SECTION */
+
+.next {
+  padding: 160px 20px;
+  display: flex;
+  justify-content: center;
 }
 
-/* BIG TEXT */
-
-.big {
-  margin-top: 120px;
-  font-size: 36px;
-  font-weight: 500;
+.big-text {
+  max-width: 800px;
+  font-size: 40px;
   line-height: 1.4;
   opacity: 0;
-}
-
-/* FORM */
-
-.form {
-  margin-top: 80px;
-  opacity: 0;
-}
-
-input {
-  border: none;
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-  font-family: inherit;
-}
-
-button {
-  border: none;
-  border-bottom: 1px solid #111;
-  background: none;
-  margin-left: 20px;
-  cursor: pointer;
 }
 
 </style>
@@ -166,41 +148,26 @@ button {
   <div class="mouse"></div>
 </section>
 
-<!-- SCROLL SECTION -->
+<!-- CINEMATIC SECTION -->
 <section class="section">
 
   <div class="sticky">
 
-    <div class="lines">
+    <div class="wrapper">
 
-      <!-- LINE 1 -->
-      <div class="line-block">
-        <div class="line"><div class="line-fill"></div></div>
+      <div class="block">
+        <div class="divider"><div class="fill"></div></div>
         <div class="text">Most people never see how they actually operate.</div>
       </div>
 
-      <!-- LINE 2 -->
-      <div class="line-block">
-        <div class="line"><div class="line-fill"></div></div>
+      <div class="block">
+        <div class="divider"><div class="fill"></div></div>
         <div class="text">Not their patterns. Not their contradictions.</div>
       </div>
 
-      <!-- LINE 3 -->
-      <div class="line-block">
-        <div class="line"><div class="line-fill"></div></div>
+      <div class="block">
+        <div class="divider"><div class="fill"></div></div>
         <div class="text">Not the forces quietly shaping their decisions.</div>
-      </div>
-
-      <!-- BIG TEXT -->
-      <div class="big">
-        This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
-      </div>
-
-      <!-- FORM -->
-      <div class="form">
-        <p>Early access is limited to a small group.</p>
-        <input placeholder="Enter your email"/>
-        <button>Request Access</button>
       </div>
 
     </div>
@@ -209,49 +176,60 @@ button {
 
 </section>
 
+<!-- NEXT FLOW -->
+<section class="next">
+  <div class="big-text">
+    This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
+  </div>
+</section>
+
 <script>
 
 gsap.registerPlugin(ScrollTrigger);
 
-const fills = document.querySelectorAll(".line-fill");
-const texts = document.querySelectorAll(".text");
+const fills = gsap.utils.toArray(".fill");
+const texts = gsap.utils.toArray(".text");
 
-const tl = gsap.timeline({
+let tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".section",
     start: "top top",
     end: "bottom bottom",
-    scrub: true,
+    scrub: 1.2, // smooth even on jerky scroll
     pin: ".sticky"
   }
 });
 
-/* Animate each line sequentially */
+/* SEQUENTIAL CINEMATIC REVEAL */
 
 fills.forEach((fill, i) => {
+
   tl.to(fill, {
     width: "100%",
-    duration: 1,
-    onUpdate: () => {
-      if (fill.style.width !== "0%") {
-        texts[i].classList.add("active");
-      }
-    }
-  });
+    duration: 1.2,
+    ease: "power2.out"
+  })
+
+  .to(texts[i], {
+    color: "#111",
+    duration: 0.8,
+    ease: "power2.out"
+  }, "-=1"); // overlap for smoothness
+
 });
 
-/* Big text reveal */
-tl.to(".big", {
-  opacity: 1,
-  y: -20,
-  duration: 1
-});
+/* NEXT SECTION REVEAL */
 
-/* Form reveal */
-tl.to(".form", {
+gsap.to(".big-text", {
+  scrollTrigger: {
+    trigger: ".next",
+    start: "top 80%",
+    end: "top 40%",
+    scrub: 1
+  },
+  y: -40,
   opacity: 1,
-  y: -10,
-  duration: 1
+  ease: "power2.out"
 });
 
 </script>
