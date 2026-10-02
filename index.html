@@ -7,159 +7,148 @@
 
 <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
-<style>
-* { box-sizing: border-box; }
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+<style>
 body {
   margin: 0;
-  font-family: "TRY Tosh A", Arial, sans-serif;
-  background: #fff;
+  background: #ffffff;
   color: #111;
+  font-family: "TRY Tosh A", Arial, sans-serif;
 }
 
 /* HERO */
 .hero {
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .logo img {
-  width: 300px;
-  max-width: 80%;
+  width: 260px;
 }
 
 .tagline {
-  margin-top: 18px;
-  width: 300px;
-  max-width: 80%;
-  text-align: center;
-  font-size: 15px;
+  margin-top: 20px;
+  font-size: 18px;
   font-weight: 500;
-  opacity: 0.75;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
 }
 
-/* Mouse Scroll */
-.mouse {
+/* MOUSE SCROLL */
+.scroll-indicator {
   position: absolute;
   bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.mouse {
   width: 22px;
   height: 36px;
   border: 1px solid #aaa;
   border-radius: 12px;
+  position: relative;
 }
 
-.mouse::after {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 50%;
+.wheel {
   width: 3px;
   height: 6px;
   background: #aaa;
+  position: absolute;
+  top: 6px;
+  left: 50%;
   transform: translateX(-50%);
   border-radius: 2px;
-  animation: scroll 1.6s infinite;
 }
 
-@keyframes scroll {
-  0% { opacity: 0; transform: translate(-50%, 0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, 10px); }
-}
-
-/* SCROLL SECTION */
-.scroll-section {
-  height: 200vh;
-  position: relative;
-}
-
-.sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* LINES */
-.lines {
-  width: 500px;
-  max-width: 90%;
+/* CONTENT */
+.section {
+  padding: 120px 20px;
+  max-width: 720px;
+  margin: auto;
 }
 
 .line {
-  position: relative;
-  margin: 20px 0;
-  padding-top: 10px;
-  font-size: 15px;
-  color: #aaa;
+  border-top: 1px solid #ddd;
+  padding: 18px 0;
+  font-size: 16px;
+  color: #999;
 }
 
-.line::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #ddd;
-}
-
-.line::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 1px;
-  background: #111;
-  transition: width 0.2s linear;
-}
-
-.line.active {
+.big-text {
+  margin-top: 80px;
+  font-size: 26px;
+  line-height: 1.5;
+  font-weight: 600;
   color: #111;
 }
 
-/* BIG TEXT */
-.big-text {
-  max-width: 600px;
-  margin: 200px auto;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: #222;
+/* FORM */
+.form-block {
+  margin-top: 80px;
+  text-align: center;
 }
 
-/* FORM */
-.form-section {
-  text-align: center;
-  margin: 120px 0;
+.form-block p {
+  font-size: 14px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 input {
   border: none;
   border-bottom: 1px solid #ccc;
   padding: 10px;
-  width: 200px;
-  margin-right: 10px;
+  width: 220px;
+  font-family: inherit;
 }
 
 button {
+  background: none;
   border: none;
   border-bottom: 1px solid #111;
-  background: none;
-  padding: 10px;
   cursor: pointer;
+  padding: 10px;
+  font-family: inherit;
 }
 
 /* MOBILE */
-@media (max-width:600px) {
+@media (max-width: 768px) {
+  .logo img {
+    width: 200px;
+  }
+
+  .tagline {
+    font-size: 16px;
+  }
+
   .big-text {
-    font-size: 22px;
+    font-size: 20px;
+  }
+
+  .form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    max-width: 280px;
   }
 }
 </style>
@@ -170,315 +159,103 @@ button {
 <!-- HERO -->
 <section class="hero">
   <div class="logo">
-    <img src="logo.png" />
+    <img src="logo.png" alt="logo">
   </div>
+
   <div class="tagline">
     Symbolic Intelligence for Alignment
   </div>
-  <div class="mouse"></div>
+
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+  </div>
 </section>
 
-<!-- SCROLL -->
-<section class="scroll-section">
+<!-- CONTENT -->
+<section class="section">
 
-  <div class="sticky">
-    <div class="lines">
+  <div class="line">Most people never see how they actually operate.</div>
+  <div class="line">Not their patterns. Not their contradictions.</div>
+  <div class="line">Not the forces quietly shaping their decisions.</div>
 
-      <div class="line">Most people never see how they actually operate.</div>
-      <div class="line">Not their patterns. Not their contradictions.</div>
-      <div class="line">Not the forces quietly shaping their decisions.</div>
+  <div class="big-text">
+    This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
+  </div>
 
+  <div class="form-block">
+    <p>Early access is limited to a small group.</p>
+
+    <div class="form">
+      <input type="email" placeholder="Enter your email" />
+      <button>Request Access</button>
     </div>
   </div>
 
 </section>
 
-<!-- BIG TEXT -->
-<div class="big-text">
-  This system maps the underlying structure of how you think, react, and move through life — 
-  with a level of precision most people aren’t ready for.
-</div>
-
-<!-- FORM -->
-<div class="form-section">
-  <p style="opacity:.5;">Early access is limited to a small group.</p>
-  <input type="email" placeholder="Enter your email">
-  <button>Request Access</button>
-</div>
-
 <script>
-const lines = document.querySelectorAll('.line');
-
-window.addEventListener('scroll', () => {
-  const section = document.querySelector('.scroll-section');
-  const rect = section.getBoundingClientRect();
-  const progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
-
-  lines.forEach((line, i) => {
-    const lineProgress = (progress * lines.length) - i;
-
-    if (lineProgress > 0) {
-      line.classList.add('active');
-      const fill = Math.min(lineProgress * 100, 100);
-      line.querySelector('::after');
-      line.style.setProperty('--fill', fill + '%');
-      line.style.position = "relative";
-      line.style.setProperty('--width', fill);
-      line.style.setProperty('--progress', fill);
-      line.style.setProperty('--x', fill);
-
-      line.style.setProperty('--after-width', fill + '%');
-      line.style.setProperty('--after-bg', '#111');
-
-      line.style.setProperty('--w', fill + '%');
-      line.style.setProperty('--p', fill);
-
-      line.style.setProperty('--line-progress', fill + '%');
-
-      line.style.setProperty('--fill-width', fill + '%');
-
-      line.style.setProperty('--active-width', fill + '%');
-
-      line.style.setProperty('--width-fill', fill + '%');
-
-      line.style.setProperty('--progress-width', fill + '%');
-
-      line.style.setProperty('--line-fill', fill + '%');
-
-      line.style.setProperty('--percent', fill + '%');
-
-      line.style.setProperty('--scale', fill);
-
-      line.style.setProperty('--w-fill', fill + '%');
-
-      line.style.setProperty('--after-width', fill + '%');
-
-      line.style.setProperty('--fill-line', fill + '%');
-
-      line.style.setProperty('--lineWidth', fill + '%');
-
-      line.style.setProperty('--progressLine', fill + '%');
-
-      line.style.setProperty('--progressValue', fill + '%');
-
-      line.style.setProperty('--value', fill + '%');
-
-      line.style.setProperty('--bar', fill + '%');
-
-      line.style.setProperty('--lineFill', fill + '%');
-
-      line.style.setProperty('--fillBar', fill + '%');
-
-      line.style.setProperty('--lineProgressWidth', fill + '%');
-
-      line.style.setProperty('--line-width', fill + '%');
-
-      line.style.setProperty('--progress-width', fill + '%');
-
-      line.style.setProperty('--afterWidth', fill + '%');
-
-      line.style.setProperty('--lineFillWidth', fill + '%');
-
-      line.style.setProperty('--lineWidthProgress', fill + '%');
-
-      line.style.setProperty('--widthProgress', fill + '%');
-
-      line.style.setProperty('--fillProgress', fill + '%');
-
-      line.style.setProperty('--line-progress-width', fill + '%');
-
-      line.style.setProperty('--line-progress-bar', fill + '%');
-
-      line.style.setProperty('--progress-bar', fill + '%');
-
-      line.style.setProperty('--line-bar', fill + '%');
-
-      line.style.setProperty('--bar-width', fill + '%');
-
-      line.style.setProperty('--fill-width-bar', fill + '%');
-
-      line.style.setProperty('--line-bar-width', fill + '%');
-
-      line.style.setProperty('--line-progress-fill', fill + '%');
-
-      line.style.setProperty('--lineFillBar', fill + '%');
-
-      line.style.setProperty('--lineProgressBarWidth', fill + '%');
-
-      line.style.setProperty('--lineProgressBar', fill + '%');
-
-      line.style.setProperty('--lineProgressValue', fill + '%');
-
-      line.style.setProperty('--lineFillValue', fill + '%');
-
-      line.style.setProperty('--lineBarValue', fill + '%');
-
-      line.style.setProperty('--progressBarWidth', fill + '%');
-
-      line.style.setProperty('--progressBarValue', fill + '%');
-
-      line.style.setProperty('--progressBarFill', fill + '%');
-
-      line.style.setProperty('--progressLineWidth', fill + '%');
-
-      line.style.setProperty('--lineFillPercent', fill + '%');
-
-      line.style.setProperty('--lineWidthPercent', fill + '%');
-
-      line.style.setProperty('--progressPercent', fill + '%');
-
-      line.style.setProperty('--barPercent', fill + '%');
-
-      line.style.setProperty('--widthPercent', fill + '%');
-
-      line.style.setProperty('--fillPercent', fill + '%');
-
-      line.style.setProperty('--lineFillPercentValue', fill + '%');
-
-      line.style.setProperty('--lineProgressPercent', fill + '%');
-
-      line.style.setProperty('--progressLinePercent', fill + '%');
-
-      line.style.setProperty('--linePercent', fill + '%');
-
-      line.style.setProperty('--percentWidth', fill + '%');
-
-      line.style.setProperty('--percentFill', fill + '%');
-
-      line.style.setProperty('--percentLine', fill + '%');
-
-      line.style.setProperty('--percentProgress', fill + '%');
-
-      line.style.setProperty('--percentBar', fill + '%');
-
-      line.style.setProperty('--progressBarPercent', fill + '%');
-
-      line.style.setProperty('--lineBarPercent', fill + '%');
-
-      line.style.setProperty('--lineFillBarPercent', fill + '%');
-
-      line.style.setProperty('--lineProgressBarPercent', fill + '%');
-
-      line.style.setProperty('--lineWidthBarPercent', fill + '%');
-
-      line.style.setProperty('--progressWidthPercent', fill + '%');
-
-      line.style.setProperty('--lineFillWidthPercent', fill + '%');
-
-      line.style.setProperty('--lineProgressWidthPercent', fill + '%');
-
-      line.style.setProperty('--progressLineWidthPercent', fill + '%');
-
-      line.style.setProperty('--barWidthPercent', fill + '%');
-
-      line.style.setProperty('--fillWidthPercent', fill + '%');
-
-      line.style.setProperty('--lineBarWidthPercent', fill + '%');
-
-      line.style.setProperty('--lineFillBarWidthPercent', fill + '%');
-
-      line.style.setProperty('--lineProgressBarWidthPercent', fill + '%');
-
-      line.style.setProperty('--linePercentWidth', fill + '%');
-
-      line.style.setProperty('--linePercentFill', fill + '%');
-
-      line.style.setProperty('--linePercentBar', fill + '%');
-
-      line.style.setProperty('--linePercentProgress', fill + '%');
-
-      line.style.setProperty('--linePercentValue', fill + '%');
-
-      line.style.setProperty('--progressPercentValue', fill + '%');
-
-      line.style.setProperty('--fillPercentValue', fill + '%');
-
-      line.style.setProperty('--barPercentValue', fill + '%');
-
-      line.style.setProperty('--widthPercentValue', fill + '%');
-
-      line.style.setProperty('--percentValue', fill + '%');
-
-      line.style.setProperty('--valuePercent', fill + '%');
-
-      line.style.setProperty('--lineValuePercent', fill + '%');
-
-      line.style.setProperty('--progressValuePercent', fill + '%');
-
-      line.style.setProperty('--fillValuePercent', fill + '%');
-
-      line.style.setProperty('--barValuePercent', fill + '%');
-
-      line.style.setProperty('--widthValuePercent', fill + '%');
-
-      line.style.setProperty('--percentWidthValue', fill + '%');
-
-      line.style.setProperty('--percentFillValue', fill + '%');
-
-      line.style.setProperty('--percentBarValue', fill + '%');
-
-      line.style.setProperty('--percentProgressValue', fill + '%');
-
-      line.style.setProperty('--percentValueWidth', fill + '%');
-
-      line.style.setProperty('--percentValueFill', fill + '%');
-
-      line.style.setProperty('--percentValueBar', fill + '%');
-
-      line.style.setProperty('--percentValueProgress', fill + '%');
-
-      line.style.setProperty('--linePercentValueWidth', fill + '%');
-
-      line.style.setProperty('--linePercentValueFill', fill + '%');
-
-      line.style.setProperty('--linePercentValueBar', fill + '%');
-
-      line.style.setProperty('--linePercentValueProgress', fill + '%');
-
-      line.style.setProperty('--progressPercentValueWidth', fill + '%');
-
-      line.style.setProperty('--progressPercentValueFill', fill + '%');
-
-      line.style.setProperty('--progressPercentValueBar', fill + '%');
-
-      line.style.setProperty('--progressPercentValueProgress', fill + '%');
-
-      line.style.setProperty('--fillPercentValueWidth', fill + '%');
-
-      line.style.setProperty('--fillPercentValueBar', fill + '%');
-
-      line.style.setProperty('--fillPercentValueProgress', fill + '%');
-
-      line.style.setProperty('--barPercentValueWidth', fill + '%');
-
-      line.style.setProperty('--barPercentValueFill', fill + '%');
-
-      line.style.setProperty('--barPercentValueProgress', fill + '%');
-
-      line.style.setProperty('--widthPercentValueFill', fill + '%');
-
-      line.style.setProperty('--widthPercentValueBar', fill + '%');
-
-      line.style.setProperty('--widthPercentValueProgress', fill + '%');
-
-      line.style.setProperty('--lineWidthValuePercent', fill + '%');
-
-      line.style.setProperty('--lineFillValuePercent', fill + '%');
-
-      line.style.setProperty('--lineBarValuePercent', fill + '%');
-
-      line.style.setProperty('--lineProgressValuePercent', fill + '%');
-
-      line.style.setProperty('--progressWidthValuePercent', fill + '%');
-
-      line.style.setProperty('--progressFillValuePercent', fill + '%');
-
-      line.style.setProperty('--progressBarValuePercent', fill + '%');
-
-      line.style.setProperty('--progressProgressValuePercent', fill + '%');
-
+gsap.registerPlugin(ScrollTrigger);
+
+/* HERO ANIMATION */
+gsap.from(".logo", {
+  opacity: 0,
+  y: -40,
+  duration: 1.2,
+  ease: "power2.out"
+});
+
+gsap.from(".tagline", {
+  opacity: 0,
+  y: 20,
+  delay: 0.5,
+  duration: 1,
+});
+
+/* MOUSE LOOP */
+gsap.to(".wheel", {
+  y: 10,
+  repeat: -1,
+  duration: 1.2,
+  ease: "power1.inOut"
+});
+
+/* LINE REVEAL */
+gsap.utils.toArray(".line").forEach((line) => {
+  gsap.fromTo(line,
+    { color: "#bbb", borderColor: "#ddd" },
+    {
+      color: "#111",
+      borderColor: "#111",
+      scrollTrigger: {
+        trigger: line,
+        start: "top 80%",
+        end: "top 60%",
+        scrub: true
+      }
     }
-  });
+  );
+});
+
+/* BIG TEXT REVEAL */
+gsap.from(".big-text", {
+  opacity: 0,
+  y: 40,
+  scrollTrigger: {
+    trigger: ".big-text",
+    start: "top 80%"
+  }
+});
+
+/* FORM */
+gsap.from(".form-block", {
+  opacity: 0,
+  y: 30,
+  scrollTrigger: {
+    trigger: ".form-block",
+    start: "top 85%"
+  }
 });
 </script>
 
