@@ -7,53 +7,72 @@
 
 <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
-<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-
 <style>
+
 body {
   margin: 0;
+  font-family: "TRY Tosh A", Arial, sans-serif;
   background: #fff;
   color: #111;
-  font-family: "TRY Tosh A", Arial, sans-serif;
-  cursor: none;
-}
-
-/* CURSOR */
-.cursor {
-  width: 8px;
-  height: 8px;
-  background: #111;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 999;
 }
 
 /* HERO */
+
 .hero {
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   flex-direction: column;
 }
+
 .logo img {
-  width: 260px;
+  width: 280px;
 }
+
 .tagline {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
   opacity: 0.7;
+  font-weight: 500;
+}
+
+/* SCROLL MOUSE */
+
+.mouse {
+  position: absolute;
+  bottom: 40px;
+  width: 18px;
+  height: 30px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+}
+
+.mouse::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 6px;
+  background: #aaa;
+  transform: translateX(-50%);
+  animation: scroll 1.5s infinite;
+}
+
+@keyframes scroll {
+  0% { opacity: 1; top: 6px; }
+  100% { opacity: 0; top: 16px; }
 }
 
 /* SECTION */
+
 .section {
-  height: 400vh;
+  height: 300vh; /* IMPORTANT for scroll */
   position: relative;
 }
 
@@ -61,221 +80,180 @@ body {
   position: sticky;
   top: 0;
   height: 100vh;
+
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.content {
+/* CONTENT */
+
+.lines {
+  width: 70%;
   max-width: 900px;
-  margin: auto;
-  padding: 0 24px;
 }
 
-/* LINES */
+.line-block {
+  margin-bottom: 40px;
+}
+
 .line {
-  font-size: 34px;
-  margin: 40px 0;
-  color: #aaa;
-  position: relative;
-}
-
-/* DIVIDER */
-.divider {
   height: 1px;
   background: #ddd;
-  margin-top: 12px;
+  margin-bottom: 12px;
   overflow: hidden;
 }
-.divider-fill {
+
+.line-fill {
   height: 100%;
   width: 0%;
   background: #111;
 }
 
-/* WORDS */
-.word {
-  opacity: 0.2;
+.text {
+  font-size: 28px;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.text.active {
+  color: #111;
 }
 
 /* BIG TEXT */
-.big-text {
+
+.big {
   margin-top: 120px;
-  font-size: 38px;
-  line-height: 1.5;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.4;
   opacity: 0;
 }
 
 /* FORM */
-.form-block {
-  margin-top: 120px;
+
+.form {
+  margin-top: 80px;
   opacity: 0;
 }
-.form {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
+
 input {
   border: none;
   border-bottom: 1px solid #ccc;
   padding: 10px;
-  width: 240px;
+  font-family: inherit;
 }
+
 button {
   border: none;
   border-bottom: 1px solid #111;
   background: none;
-  padding: 10px;
+  margin-left: 20px;
   cursor: pointer;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  .line { font-size: 24px; }
-  .big-text { font-size: 24px; }
-  .form { flex-direction: column; }
-}
 </style>
 </head>
 
 <body>
 
-<div class="cursor"></div>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="logo"><img src="logo.png"></div>
+  <div class="logo">
+    <img src="logo.png" />
+  </div>
   <div class="tagline">Symbolic Intelligence for Alignment</div>
+  <div class="mouse"></div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- SCROLL SECTION -->
 <section class="section">
+
   <div class="sticky">
-    <div class="content">
 
-      <div class="line">
-        <span class="text">Most people never see how they actually operate.</span>
-        <div class="divider"><div class="divider-fill"></div></div>
+    <div class="lines">
+
+      <!-- LINE 1 -->
+      <div class="line-block">
+        <div class="line"><div class="line-fill"></div></div>
+        <div class="text">Most people never see how they actually operate.</div>
       </div>
 
-      <div class="line">
-        <span class="text">Not their patterns. Not their contradictions.</span>
-        <div class="divider"><div class="divider-fill"></div></div>
+      <!-- LINE 2 -->
+      <div class="line-block">
+        <div class="line"><div class="line-fill"></div></div>
+        <div class="text">Not their patterns. Not their contradictions.</div>
       </div>
 
-      <div class="line">
-        <span class="text">Not the forces quietly shaping their decisions.</span>
-        <div class="divider"><div class="divider-fill"></div></div>
+      <!-- LINE 3 -->
+      <div class="line-block">
+        <div class="line"><div class="line-fill"></div></div>
+        <div class="text">Not the forces quietly shaping their decisions.</div>
       </div>
 
-      <div class="big-text">
+      <!-- BIG TEXT -->
+      <div class="big">
         This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
       </div>
 
-      <div class="form-block">
+      <!-- FORM -->
+      <div class="form">
         <p>Early access is limited to a small group.</p>
-        <div class="form">
-          <input type="email" placeholder="Enter your email">
-          <button>Request Access</button>
-        </div>
+        <input placeholder="Enter your email"/>
+        <button>Request Access</button>
       </div>
 
     </div>
+
   </div>
+
 </section>
 
 <script>
+
 gsap.registerPlugin(ScrollTrigger);
 
-/* LENIS */
-const lenis = new Lenis({
-  duration: 1.2,
-  smooth: true
-});
+const fills = document.querySelectorAll(".line-fill");
+const texts = document.querySelectorAll(".text");
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-/* CURSOR */
-const cursor = document.querySelector(".cursor");
-window.addEventListener("mousemove", e => {
-  gsap.to(cursor, {
-    x: e.clientX,
-    y: e.clientY,
-    duration: 0.2
-  });
-});
-
-/* WORD SPLIT */
-document.querySelectorAll(".text").forEach(el => {
-  const words = el.innerText.split(" ");
-  el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
-});
-
-/* TIMELINE */
 const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".section",
     start: "top top",
     end: "bottom bottom",
-    scrub: true
+    scrub: true,
+    pin: ".sticky"
   }
 });
 
-/* LINES */
-gsap.utils.toArray(".line").forEach((line, i) => {
-  const words = line.querySelectorAll(".word");
-  const fill = line.querySelector(".divider-fill");
+/* Animate each line sequentially */
 
-  tl.to(words, {
-    opacity: 1,
-    stagger: 0.05,
-    duration: 1
-  }, i * 1.2);
-
+fills.forEach((fill, i) => {
   tl.to(fill, {
     width: "100%",
-    duration: 1
-  }, i * 1.2);
-
-  tl.to(line, {
-    color: "#111",
-    duration: 0.3
-  }, i * 1.2);
+    duration: 1,
+    onUpdate: () => {
+      if (fill.style.width !== "0%") {
+        texts[i].classList.add("active");
+      }
+    }
+  });
 });
 
-/* BIG TEXT */
-gsap.to(".big-text", {
+/* Big text reveal */
+tl.to(".big", {
+  opacity: 1,
+  y: -20,
+  duration: 1
+});
+
+/* Form reveal */
+tl.to(".form", {
   opacity: 1,
   y: -10,
-  scrollTrigger: {
-    trigger: ".big-text",
-    start: "top 80%"
-  }
+  duration: 1
 });
 
-/* FORM */
-gsap.to(".form-block", {
-  opacity: 1,
-  y: -10,
-  scrollTrigger: {
-    trigger: ".form-block",
-    start: "top 85%"
-  }
-});
-
-/* SUBTLE DRIFT */
-gsap.to(".content", {
-  x: -40,
-  scrollTrigger: {
-    trigger: ".section",
-    scrub: true
-  }
-});
 </script>
 
 </body>
