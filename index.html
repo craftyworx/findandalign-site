@@ -7,164 +7,154 @@
 
 <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
 <style>
-
-/* BASE */
-
 body {
   margin: 0;
   font-family: "TRY Tosh A", Arial, sans-serif;
-  background: #fff;
+  background: #f7f7f7;
   color: #111;
+  overflow-x: hidden;
 }
 
 /* HERO */
-
 .hero {
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-}
-
-.logo {
-  opacity: 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo img {
-  width: 280px;
+  width: 260px;
 }
 
 .tagline {
   margin-top: 20px;
   font-size: 16px;
-  opacity: 0;
-  font-weight: 500;
+  opacity: 0.6;
 }
 
 /* SCROLL INDICATOR */
-
-.mouse {
+.scroll-indicator {
   position: absolute;
   bottom: 40px;
-  width: 18px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  width: 22px;
+  height: 36px;
+  border: 1px solid #bbb;
+  border-radius: 12px;
 }
 
-.mouse::after {
+.scroll-indicator::after {
   content: "";
-  position: absolute;
-  top: 6px;
-  left: 50%;
   width: 3px;
   height: 6px;
-  background: #ccc;
+  background: #bbb;
+  position: absolute;
+  left: 50%;
+  top: 8px;
   transform: translateX(-50%);
-  animation: scroll 1.5s infinite;
+  border-radius: 2px;
+  animation: scroll 1.6s infinite;
 }
 
 @keyframes scroll {
-  0% { opacity: 1; top: 6px; }
-  100% { opacity: 0; top: 16px; }
+  0% {opacity: 0; transform: translate(-50%,0);}
+  50% {opacity: 1;}
+  100% {opacity: 0; transform: translate(-50%,10px);}
 }
 
 /* DIVIDER SECTION */
-
-.section {
+.divider-section {
   height: 300vh;
+  position: relative;
 }
 
-.sticky {
+.divider-inner {
   position: sticky;
   top: 0;
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.wrapper {
+.divider-content {
   width: 70%;
   max-width: 900px;
 }
 
-.block {
-  margin-bottom: 70px;
+.line {
+  margin: 40px 0;
 }
 
-.divider {
+.line-text {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #bbb;
+}
+
+.line-bar {
   height: 1px;
-  background: #eeeeee; /* lighter */
-  margin-bottom: 14px;
+  background: #ddd;
+  position: relative;
   overflow: hidden;
 }
 
-.fill {
-  width: 0%;
+.line-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
+  width: 0%;
   background: #111;
 }
 
-.text {
-  font-size: 32px;
-  color: #bbb;
-  line-height: 1.4;
-}
-
-/* BIG TEXT */
-
-.next {
-  padding: 160px 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.big-text {
-  max-width: 800px;
-  font-size: 40px;
-  line-height: 1.4;
-  opacity: 0;
-}
-
-/* FINAL TEXT */
-
-.final {
-  padding: 140px 20px;
+/* BLOCK TEXT */
+.block-section {
+  padding: 120px 20px;
   text-align: center;
 }
 
-.final p {
+.block-text {
+  max-width: 800px;
+  margin: auto;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* FINAL TEXT */
+.final-section {
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.final-text {
   max-width: 700px;
-  margin: 20px auto;
+  margin: auto;
   font-size: 20px;
-  opacity: 0;
+  line-height: 1.6;
+  opacity: 0.8;
 }
 
 /* FORM */
-
 .form {
   margin-top: 40px;
-  opacity: 0;
 }
 
 input {
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #aaa;
   padding: 10px;
-  font-family: inherit;
   width: 220px;
+  background: transparent;
 }
 
 button {
   border: none;
   border-bottom: 1px solid #111;
-  background: none;
+  background: transparent;
   margin-left: 20px;
   cursor: pointer;
 }
@@ -174,7 +164,6 @@ button {
   font-size: 12px;
   opacity: 0.4;
 }
-
 </style>
 </head>
 
@@ -186,46 +175,47 @@ button {
     <img src="logo.png" />
   </div>
   <div class="tagline">Symbolic Intelligence for Alignment</div>
-  <div class="mouse"></div>
+  <div class="scroll-indicator"></div>
 </section>
 
 <!-- DIVIDER -->
-<section class="section">
-  <div class="sticky">
-    <div class="wrapper">
+<section class="divider-section">
+  <div class="divider-inner">
+    <div class="divider-content">
 
-      <div class="block">
-        <div class="divider"><div class="fill"></div></div>
-        <div class="text">Most people never see how they actually operate.</div>
+      <div class="line">
+        <div class="line-text">Most people never see how they actually operate.</div>
+        <div class="line-bar"><div class="line-fill"></div></div>
       </div>
 
-      <div class="block">
-        <div class="divider"><div class="fill"></div></div>
-        <div class="text">Not their patterns. Not their contradictions.</div>
+      <div class="line">
+        <div class="line-text">Not their patterns. Not their contradictions.</div>
+        <div class="line-bar"><div class="line-fill"></div></div>
       </div>
 
-      <div class="block">
-        <div class="divider"><div class="fill"></div></div>
-        <div class="text">Not the forces quietly shaping their decisions.</div>
+      <div class="line">
+        <div class="line-text">Not the forces quietly shaping their decisions.</div>
+        <div class="line-bar"><div class="line-fill"></div></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- BIG TEXT -->
-<section class="next">
-  <div class="big-text">
+<!-- BLOCK -->
+<section class="block-section">
+  <div class="block-text split">
     This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
   </div>
 </section>
 
 <!-- FINAL -->
-<section class="final">
-
-  <p class="reveal">It doesn’t define you.</p>
-  <p class="reveal">It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.</p>
-  <p class="reveal">This is not for everyone.</p>
+<section class="final-section">
+  <div class="final-text split">
+    It doesn’t define you.<br><br>
+    It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.<br><br>
+    This is not for everyone.
+  </div>
 
   <div class="form">
     <p>Early access is limited to a small group.</p>
@@ -233,94 +223,75 @@ button {
     <button>Request Access</button>
   </div>
 
-  <div class="footer">
-    in development — 2026
-  </div>
-
+  <div class="footer">in development — 2026</div>
 </section>
 
-<script>
+<!-- GSAP + LENIS -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/bundled/lenis.min.js"></script>
 
+<script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* HERO INTRO */
+/* SMOOTH SCROLL */
+const lenis = new Lenis({ lerp: 0.07 });
 
-gsap.to(".logo", {
-  opacity: 1,
-  duration: 1.2,
-  ease: "power2.out"
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
 });
+gsap.ticker.lagSmoothing(0);
 
-gsap.to(".tagline", {
-  opacity: 1,
-  delay: 0.6,
-  duration: 1.2
-});
+/* DIVIDER ANIMATION */
+document.querySelectorAll(".line").forEach((line, i) => {
+  let fill = line.querySelector(".line-fill");
+  let text = line.querySelector(".line-text");
 
-/* DIVIDER SECTION */
-
-const fills = gsap.utils.toArray(".fill");
-const texts = gsap.utils.toArray(".text");
-
-let tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".section",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1.5,
-    pin: ".sticky"
-  }
-});
-
-fills.forEach((fill, i) => {
-  tl.to(fill, { width: "100%", duration: 1.2 })
-    .to(texts[i], { color: "#111", duration: 1 }, "-=1");
-});
-
-/* BIG TEXT */
-
-gsap.to(".big-text", {
-  scrollTrigger: {
-    trigger: ".next",
-    start: "top 80%",
-    end: "top 40%",
-    scrub: 1.2
-  },
-  y: -40,
-  opacity: 1
-});
-
-/* FINAL TEXT WORD REVEAL */
-
-document.querySelectorAll(".reveal").forEach(p => {
-  let words = p.innerText.split(" ");
-  p.innerHTML = words.map(w => `<span>${w}</span>`).join(" ");
-  
-  gsap.from(p.querySelectorAll("span"), {
+  gsap.to(fill, {
+    width: "100%",
     scrollTrigger: {
-      trigger: p,
-      start: "top 85%",
-      toggleActions: "play none none none"
-    },
-    opacity: 0,
-    y: 10,
-    stagger: 0.05,
-    duration: 0.6
+      trigger: line,
+      start: "top center",
+      end: "bottom center",
+      scrub: true
+    }
+  });
+
+  gsap.to(text, {
+    color: "#111",
+    scrollTrigger: {
+      trigger: line,
+      start: "top center",
+      end: "bottom center",
+      scrub: true
+    }
   });
 });
 
-/* FORM */
+/* WORD REVEAL (REAL ONE) */
+function splitWords(el) {
+  const words = el.innerText.split(" ");
+  el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+  return el.querySelectorAll(".word");
+}
 
-gsap.to(".form", {
-  scrollTrigger: {
-    trigger: ".form",
-    start: "top 85%"
-  },
-  opacity: 1,
-  y: -10,
-  duration: 1
+document.querySelectorAll(".split").forEach(el => {
+  const words = splitWords(el);
+
+  gsap.set(words, { opacity: 0 });
+
+  gsap.to(words, {
+    opacity: 1,
+    stagger: 0.15,
+    scrollTrigger: {
+      trigger: el,
+      start: "top 80%",
+      end: "top 20%",
+      scrub: true
+    }
+  });
 });
-
 </script>
 
 </body>
