@@ -8,6 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -16,30 +20,29 @@ body {
   overflow-x: hidden;
 }
 
-.section {
-  min-height: 100vh;
+/* ================= HERO ================= */
+
+.hero {
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
   text-align: center;
+  position: relative;
 }
 
-/* HERO */
-.hero h1 {
-  font-size: clamp(36px, 6vw, 64px);
+#logo {
+  font-size: clamp(42px, 6vw, 64px);
   font-weight: 500;
-  margin: 0;
 }
 
-.hero p {
+#tagline {
   margin-top: 12px;
   font-size: 16px;
-  font-weight: 400;
   opacity: 0.85;
 }
 
-/* MOUSE */
+/* mouse */
 .mouse {
   position: absolute;
   bottom: 40px;
@@ -59,52 +62,72 @@ body {
   border-radius: 2px;
 }
 
-/* DIVIDER SECTION */
+/* ================= DIVIDER ================= */
+
 .divider-section {
   height: 300vh;
 }
 
-.divider-wrap {
-  width: min(800px, 90%);
+.divider-inner {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(900px, 90%);
+  margin: 0 auto;
 }
 
 .divider-line {
   height: 1px;
-  background: #ddd;
-  margin: 40px 0 20px;
+  background: #e6e6e6;
   transform-origin: left;
   transform: scaleX(0);
+  margin: 60px 0 20px;
 }
 
 .divider-text {
-  font-size: clamp(22px, 2.2vw, 28px);
-  opacity: 0.2;
+  font-size: clamp(26px, 2.5vw, 32px);
+  line-height: 1.4;
 }
 
-/* BLOCK */
-.block {
-  font-size: clamp(26px, 2.5vw, 34px);
+/* ================= BLOCK ================= */
+
+.block-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+#blockText {
+  max-width: 900px;
+  font-size: clamp(30px, 3vw, 40px);
   font-weight: 500;
   line-height: 1.5;
-  max-width: 800px;
-  opacity: 0.1;
 }
 
-/* FINAL */
+/* ================= FINAL ================= */
+
 .final {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  text-align: center;
+  padding: 0 20px;
 }
 
 .final-line {
+  max-width: 700px;
   font-size: 18px;
-  opacity: 0.15;
+  line-height: 1.6;
 }
 
-/* FORM */
 .form {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 input {
@@ -123,7 +146,7 @@ button {
 }
 
 .footer {
-  margin-top: 40px;
+  margin-top: 20px;
   font-size: 12px;
   opacity: 0.4;
 }
@@ -133,11 +156,12 @@ button {
 <body>
 
 <!-- HERO -->
-<section class="section hero">
+<section class="hero">
   <div>
-    <h1 id="logo">findandalign</h1>
-    <p id="tagline">Symbolic Intelligence for Alignment</p>
+    <div id="logo">findandalign</div>
+    <div id="tagline">Symbolic Intelligence for Alignment</div>
   </div>
+
   <div class="mouse">
     <div class="wheel"></div>
   </div>
@@ -145,35 +169,38 @@ button {
 
 <!-- DIVIDER -->
 <section class="divider-section">
-  <div class="section">
-    <div class="divider-wrap">
-      
-      <div class="divider-line"></div>
-      <div class="divider-text">Most people never see how they actually operate.</div>
+  <div class="divider-inner">
 
-      <div class="divider-line"></div>
-      <div class="divider-text">Not their patterns. Not their contradictions.</div>
+    <div class="divider-line"></div>
+    <div class="divider-text">Most people never see how they actually operate.</div>
 
-      <div class="divider-line"></div>
-      <div class="divider-text">Not the forces quietly shaping their decisions.</div>
+    <div class="divider-line"></div>
+    <div class="divider-text">Not their patterns. Not their contradictions.</div>
 
-      <div class="divider-line"></div>
+    <div class="divider-line"></div>
+    <div class="divider-text">Not the forces quietly shaping their decisions.</div>
 
-    </div>
+    <div class="divider-line"></div>
+
   </div>
 </section>
 
 <!-- BLOCK -->
-<section class="section">
-  <div class="block" id="blockText">
+<section class="block-section">
+  <div id="blockText">
     This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
   </div>
 </section>
 
 <!-- FINAL -->
-<section class="section final">
+<section class="final">
+
   <div class="final-line">It doesn’t define you.</div>
-  <div class="final-line">It shows you where you're misaligned, what’s driving it, and what changes when you become aware of it.</div>
+
+  <div class="final-line">
+    It shows you where you're misaligned, what’s driving it, and what changes when you become aware of it.
+  </div>
+
   <div class="final-line">This is not for everyone.</div>
 
   <div class="form">
@@ -183,6 +210,7 @@ button {
   </div>
 
   <div class="footer">in development — 2026</div>
+
 </section>
 
 <!-- SCRIPTS -->
@@ -195,31 +223,32 @@ button {
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* SMOOTH SCROLL */
-const lenis = new Lenis({
-  lerp: 0.08
-});
+const lenis = new Lenis({ lerp: 0.08 });
 
 function raf(time){
   lenis.raf(time);
+  ScrollTrigger.update();
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
 
 /* HERO */
 gsap.from("#logo", {
-  y: 20,
+  y: 30,
   opacity: 0,
-  duration: 1.2,
+  duration: 1.4,
   ease: "power3.out"
 });
 
 gsap.from("#tagline", {
   opacity: 0,
-  delay: 0.4,
-  duration: 1
+  y: 10,
+  delay: 0.3,
+  duration: 1.2,
+  ease: "power2.out"
 });
 
-/* MOUSE */
+/* mouse */
 gsap.to(".wheel", {
   y: 10,
   repeat: -1,
@@ -228,68 +257,92 @@ gsap.to(".wheel", {
   duration: 1
 });
 
-/* DIVIDER */
-const lines = gsap.utils.toArray(".divider-line");
-const texts = gsap.utils.toArray(".divider-text");
-
-lines.forEach((line, i) => {
+/* DIVIDER LINES */
+gsap.utils.toArray(".divider-line").forEach(line => {
   gsap.to(line, {
     scaleX: 1,
     background: "#111",
+    ease: "none",
     scrollTrigger: {
       trigger: line,
-      start: "top 70%",
-      end: "top 40%",
+      start: "top 75%",
+      end: "top 45%",
       scrub: true
     }
   });
 });
 
-texts.forEach((text) => {
+/* DIVIDER TEXT (SILK REVEAL) */
+gsap.utils.toArray(".divider-text").forEach(text => {
+
   const split = new SplitText(text, { type: "words" });
+
+  gsap.set(split.words, {
+    opacity: 0.02,
+    filter: "blur(6px)"
+  });
 
   gsap.to(split.words, {
     opacity: 1,
-    stagger: 0.04,
+    filter: "blur(0px)",
+    stagger: 0.06,
     ease: "none",
     scrollTrigger: {
       trigger: text,
-      start: "top 75%",
+      start: "top 80%",
       end: "top 50%",
       scrub: true
     }
   });
+
 });
 
 /* BLOCK TEXT */
 const splitBlock = new SplitText("#blockText", { type: "words" });
 
+gsap.set(splitBlock.words, {
+  opacity: 0.02,
+  y: 10,
+  filter: "blur(8px)"
+});
+
 gsap.to(splitBlock.words, {
   opacity: 1,
-  stagger: 0.05,
+  y: 0,
+  filter: "blur(0px)",
+  stagger: 0.07,
   ease: "none",
   scrollTrigger: {
     trigger: "#blockText",
-    start: "top 80%",
-    end: "top 40%",
+    start: "top 85%",
+    end: "top 45%",
     scrub: true
   }
 });
 
-/* FINAL */
-gsap.utils.toArray(".final-line").forEach((line) => {
+/* FINAL TEXT */
+gsap.utils.toArray(".final-line").forEach(line => {
+
   const split = new SplitText(line, { type: "words" });
+
+  gsap.set(split.words, {
+    opacity: 0.02,
+    filter: "blur(6px)"
+  });
 
   gsap.to(split.words, {
     opacity: 1,
-    stagger: 0.04,
+    filter: "blur(0px)",
+    stagger: 0.06,
+    ease: "none",
     scrollTrigger: {
       trigger: line,
-      start: "top 85%",
+      start: "top 90%",
       end: "top 60%",
       scrub: true
     }
   });
+
 });
 </script>
 
