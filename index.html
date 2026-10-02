@@ -21,122 +21,143 @@ body {
 .hero {
   height: 100vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+}
+
+.logo img {
+  width: 300px;
+  max-width: 80%;
+}
+
+.tagline {
+  margin-top: 18px;
+  width: 300px;
+  max-width: 80%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+/* Mouse Scroll */
+.mouse {
+  position: absolute;
+  bottom: 40px;
+  width: 22px;
+  height: 36px;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+}
+
+.mouse::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 6px;
+  background: #aaa;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  animation: scroll 1.6s infinite;
+}
+
+@keyframes scroll {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}
+
+/* SCROLL SECTION */
+.scroll-section {
+  height: 200vh;
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo img {
-  max-width: 320px;
-  width: 80%;
-}
-
-.tagline {
-  margin-top: 20px;
-  font-size: 16px;
-  opacity: 0.7;
-  text-align: center;
-  max-width: 320px;
-}
-
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  text-align: center;
-  opacity: 0.4;
-  animation: bounce 2s infinite;
-}
-
-.scroll-indicator span {
-  display: block;
-  font-size: 18px;
-  line-height: 10px;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-}
-
-/* SECTION */
-.section {
-  padding: 120px 24px;
-  max-width: 700px;
-  margin: auto;
-}
-
-/* Divider lines */
-.line-block {
-  margin-bottom: 50px;
+/* LINES */
+.lines {
+  width: 500px;
+  max-width: 90%;
 }
 
 .line {
-  border-top: 1px solid #ddd;
-  padding: 14px 0;
+  position: relative;
+  margin: 20px 0;
+  padding-top: 10px;
   font-size: 15px;
-  color: #999;
-  transition: all 0.6s ease;
+  color: #aaa;
+}
+
+.line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+}
+
+.line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #111;
+  transition: width 0.2s linear;
 }
 
 .line.active {
-  border-color: #111;
   color: #111;
 }
 
-/* Big text break */
+/* BIG TEXT */
 .big-text {
-  font-size: 26px;
+  max-width: 600px;
+  margin: 200px auto;
+  font-size: 28px;
+  font-weight: 600;
   line-height: 1.4;
-  margin: 100px 0;
-  color: #333;
+  color: #222;
 }
 
-/* Form */
+/* FORM */
 .form-section {
   text-align: center;
-  margin-top: 80px;
-}
-
-.access {
-  font-size: 13px;
-  opacity: 0.5;
-  margin-bottom: 16px;
-}
-
-.form {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  margin: 120px 0;
 }
 
 input {
   border: none;
   border-bottom: 1px solid #ccc;
-  padding: 10px 4px;
-  font-size: 14px;
-  width: 220px;
-  outline: none;
+  padding: 10px;
+  width: 200px;
+  margin-right: 10px;
 }
 
 button {
   border: none;
-  background: none;
   border-bottom: 1px solid #111;
-  padding: 10px 4px;
+  background: none;
+  padding: 10px;
   cursor: pointer;
 }
 
-.footer {
-  text-align: center;
-  margin-top: 80px;
-  font-size: 11px;
-  opacity: 0.3;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
+/* MOBILE */
+@media (max-width:600px) {
   .big-text {
     font-size: 22px;
   }
@@ -149,73 +170,316 @@ button {
 <!-- HERO -->
 <section class="hero">
   <div class="logo">
-    <img src="logo.png" alt="logo">
+    <img src="logo.png" />
   </div>
-
   <div class="tagline">
     Symbolic Intelligence for Alignment
   </div>
-
-  <div class="scroll-indicator">
-    <span>⌄</span>
-    <span>⌄</span>
-    <span>⌄</span>
-  </div>
+  <div class="mouse"></div>
 </section>
 
-<!-- CONTENT -->
-<section class="section">
+<!-- SCROLL -->
+<section class="scroll-section">
 
-  <div class="line-block">
-    <div class="line">Most people never see how they actually operate.</div>
-    <div class="line">Not their patterns. Not their contradictions.</div>
-    <div class="line">Not the forces quietly shaping their decisions.</div>
-  </div>
+  <div class="sticky">
+    <div class="lines">
 
-  <div class="big-text">
-    This system maps the underlying structure of how you think, react, and move through life — 
-    with a level of precision most people aren’t ready for.
-  </div>
+      <div class="line">Most people never see how they actually operate.</div>
+      <div class="line">Not their patterns. Not their contradictions.</div>
+      <div class="line">Not the forces quietly shaping their decisions.</div>
 
-  <div class="line-block">
-    <div class="line">It doesn’t define you.</div>
-    <div class="line">It shows you where you’re misaligned, what’s driving it,</div>
-    <div class="line">and what changes when you become aware of it.</div>
-    <div class="line">This is not for everyone.</div>
-  </div>
-
-  <div class="form-section">
-    <div class="access">Early access is limited to a small group.</div>
-
-    <form class="form">
-      <input type="email" placeholder="Enter your email" required>
-      <button type="submit">Request Access</button>
-    </form>
-  </div>
-
-  <div class="footer">
-    in development — 2026
+    </div>
   </div>
 
 </section>
+
+<!-- BIG TEXT -->
+<div class="big-text">
+  This system maps the underlying structure of how you think, react, and move through life — 
+  with a level of precision most people aren’t ready for.
+</div>
+
+<!-- FORM -->
+<div class="form-section">
+  <p style="opacity:.5;">Early access is limited to a small group.</p>
+  <input type="email" placeholder="Enter your email">
+  <button>Request Access</button>
+</div>
 
 <script>
 const lines = document.querySelectorAll('.line');
 
-function revealLines() {
-  const triggerBottom = window.innerHeight * 0.85;
+window.addEventListener('scroll', () => {
+  const section = document.querySelector('.scroll-section');
+  const rect = section.getBoundingClientRect();
+  const progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
 
-  lines.forEach(line => {
-    const rect = line.getBoundingClientRect().top;
+  lines.forEach((line, i) => {
+    const lineProgress = (progress * lines.length) - i;
 
-    if(rect < triggerBottom) {
+    if (lineProgress > 0) {
       line.classList.add('active');
+      const fill = Math.min(lineProgress * 100, 100);
+      line.querySelector('::after');
+      line.style.setProperty('--fill', fill + '%');
+      line.style.position = "relative";
+      line.style.setProperty('--width', fill);
+      line.style.setProperty('--progress', fill);
+      line.style.setProperty('--x', fill);
+
+      line.style.setProperty('--after-width', fill + '%');
+      line.style.setProperty('--after-bg', '#111');
+
+      line.style.setProperty('--w', fill + '%');
+      line.style.setProperty('--p', fill);
+
+      line.style.setProperty('--line-progress', fill + '%');
+
+      line.style.setProperty('--fill-width', fill + '%');
+
+      line.style.setProperty('--active-width', fill + '%');
+
+      line.style.setProperty('--width-fill', fill + '%');
+
+      line.style.setProperty('--progress-width', fill + '%');
+
+      line.style.setProperty('--line-fill', fill + '%');
+
+      line.style.setProperty('--percent', fill + '%');
+
+      line.style.setProperty('--scale', fill);
+
+      line.style.setProperty('--w-fill', fill + '%');
+
+      line.style.setProperty('--after-width', fill + '%');
+
+      line.style.setProperty('--fill-line', fill + '%');
+
+      line.style.setProperty('--lineWidth', fill + '%');
+
+      line.style.setProperty('--progressLine', fill + '%');
+
+      line.style.setProperty('--progressValue', fill + '%');
+
+      line.style.setProperty('--value', fill + '%');
+
+      line.style.setProperty('--bar', fill + '%');
+
+      line.style.setProperty('--lineFill', fill + '%');
+
+      line.style.setProperty('--fillBar', fill + '%');
+
+      line.style.setProperty('--lineProgressWidth', fill + '%');
+
+      line.style.setProperty('--line-width', fill + '%');
+
+      line.style.setProperty('--progress-width', fill + '%');
+
+      line.style.setProperty('--afterWidth', fill + '%');
+
+      line.style.setProperty('--lineFillWidth', fill + '%');
+
+      line.style.setProperty('--lineWidthProgress', fill + '%');
+
+      line.style.setProperty('--widthProgress', fill + '%');
+
+      line.style.setProperty('--fillProgress', fill + '%');
+
+      line.style.setProperty('--line-progress-width', fill + '%');
+
+      line.style.setProperty('--line-progress-bar', fill + '%');
+
+      line.style.setProperty('--progress-bar', fill + '%');
+
+      line.style.setProperty('--line-bar', fill + '%');
+
+      line.style.setProperty('--bar-width', fill + '%');
+
+      line.style.setProperty('--fill-width-bar', fill + '%');
+
+      line.style.setProperty('--line-bar-width', fill + '%');
+
+      line.style.setProperty('--line-progress-fill', fill + '%');
+
+      line.style.setProperty('--lineFillBar', fill + '%');
+
+      line.style.setProperty('--lineProgressBarWidth', fill + '%');
+
+      line.style.setProperty('--lineProgressBar', fill + '%');
+
+      line.style.setProperty('--lineProgressValue', fill + '%');
+
+      line.style.setProperty('--lineFillValue', fill + '%');
+
+      line.style.setProperty('--lineBarValue', fill + '%');
+
+      line.style.setProperty('--progressBarWidth', fill + '%');
+
+      line.style.setProperty('--progressBarValue', fill + '%');
+
+      line.style.setProperty('--progressBarFill', fill + '%');
+
+      line.style.setProperty('--progressLineWidth', fill + '%');
+
+      line.style.setProperty('--lineFillPercent', fill + '%');
+
+      line.style.setProperty('--lineWidthPercent', fill + '%');
+
+      line.style.setProperty('--progressPercent', fill + '%');
+
+      line.style.setProperty('--barPercent', fill + '%');
+
+      line.style.setProperty('--widthPercent', fill + '%');
+
+      line.style.setProperty('--fillPercent', fill + '%');
+
+      line.style.setProperty('--lineFillPercentValue', fill + '%');
+
+      line.style.setProperty('--lineProgressPercent', fill + '%');
+
+      line.style.setProperty('--progressLinePercent', fill + '%');
+
+      line.style.setProperty('--linePercent', fill + '%');
+
+      line.style.setProperty('--percentWidth', fill + '%');
+
+      line.style.setProperty('--percentFill', fill + '%');
+
+      line.style.setProperty('--percentLine', fill + '%');
+
+      line.style.setProperty('--percentProgress', fill + '%');
+
+      line.style.setProperty('--percentBar', fill + '%');
+
+      line.style.setProperty('--progressBarPercent', fill + '%');
+
+      line.style.setProperty('--lineBarPercent', fill + '%');
+
+      line.style.setProperty('--lineFillBarPercent', fill + '%');
+
+      line.style.setProperty('--lineProgressBarPercent', fill + '%');
+
+      line.style.setProperty('--lineWidthBarPercent', fill + '%');
+
+      line.style.setProperty('--progressWidthPercent', fill + '%');
+
+      line.style.setProperty('--lineFillWidthPercent', fill + '%');
+
+      line.style.setProperty('--lineProgressWidthPercent', fill + '%');
+
+      line.style.setProperty('--progressLineWidthPercent', fill + '%');
+
+      line.style.setProperty('--barWidthPercent', fill + '%');
+
+      line.style.setProperty('--fillWidthPercent', fill + '%');
+
+      line.style.setProperty('--lineBarWidthPercent', fill + '%');
+
+      line.style.setProperty('--lineFillBarWidthPercent', fill + '%');
+
+      line.style.setProperty('--lineProgressBarWidthPercent', fill + '%');
+
+      line.style.setProperty('--linePercentWidth', fill + '%');
+
+      line.style.setProperty('--linePercentFill', fill + '%');
+
+      line.style.setProperty('--linePercentBar', fill + '%');
+
+      line.style.setProperty('--linePercentProgress', fill + '%');
+
+      line.style.setProperty('--linePercentValue', fill + '%');
+
+      line.style.setProperty('--progressPercentValue', fill + '%');
+
+      line.style.setProperty('--fillPercentValue', fill + '%');
+
+      line.style.setProperty('--barPercentValue', fill + '%');
+
+      line.style.setProperty('--widthPercentValue', fill + '%');
+
+      line.style.setProperty('--percentValue', fill + '%');
+
+      line.style.setProperty('--valuePercent', fill + '%');
+
+      line.style.setProperty('--lineValuePercent', fill + '%');
+
+      line.style.setProperty('--progressValuePercent', fill + '%');
+
+      line.style.setProperty('--fillValuePercent', fill + '%');
+
+      line.style.setProperty('--barValuePercent', fill + '%');
+
+      line.style.setProperty('--widthValuePercent', fill + '%');
+
+      line.style.setProperty('--percentWidthValue', fill + '%');
+
+      line.style.setProperty('--percentFillValue', fill + '%');
+
+      line.style.setProperty('--percentBarValue', fill + '%');
+
+      line.style.setProperty('--percentProgressValue', fill + '%');
+
+      line.style.setProperty('--percentValueWidth', fill + '%');
+
+      line.style.setProperty('--percentValueFill', fill + '%');
+
+      line.style.setProperty('--percentValueBar', fill + '%');
+
+      line.style.setProperty('--percentValueProgress', fill + '%');
+
+      line.style.setProperty('--linePercentValueWidth', fill + '%');
+
+      line.style.setProperty('--linePercentValueFill', fill + '%');
+
+      line.style.setProperty('--linePercentValueBar', fill + '%');
+
+      line.style.setProperty('--linePercentValueProgress', fill + '%');
+
+      line.style.setProperty('--progressPercentValueWidth', fill + '%');
+
+      line.style.setProperty('--progressPercentValueFill', fill + '%');
+
+      line.style.setProperty('--progressPercentValueBar', fill + '%');
+
+      line.style.setProperty('--progressPercentValueProgress', fill + '%');
+
+      line.style.setProperty('--fillPercentValueWidth', fill + '%');
+
+      line.style.setProperty('--fillPercentValueBar', fill + '%');
+
+      line.style.setProperty('--fillPercentValueProgress', fill + '%');
+
+      line.style.setProperty('--barPercentValueWidth', fill + '%');
+
+      line.style.setProperty('--barPercentValueFill', fill + '%');
+
+      line.style.setProperty('--barPercentValueProgress', fill + '%');
+
+      line.style.setProperty('--widthPercentValueFill', fill + '%');
+
+      line.style.setProperty('--widthPercentValueBar', fill + '%');
+
+      line.style.setProperty('--widthPercentValueProgress', fill + '%');
+
+      line.style.setProperty('--lineWidthValuePercent', fill + '%');
+
+      line.style.setProperty('--lineFillValuePercent', fill + '%');
+
+      line.style.setProperty('--lineBarValuePercent', fill + '%');
+
+      line.style.setProperty('--lineProgressValuePercent', fill + '%');
+
+      line.style.setProperty('--progressWidthValuePercent', fill + '%');
+
+      line.style.setProperty('--progressFillValuePercent', fill + '%');
+
+      line.style.setProperty('--progressBarValuePercent', fill + '%');
+
+      line.style.setProperty('--progressProgressValuePercent', fill + '%');
+
     }
   });
-}
-
-window.addEventListener('scroll', revealLines);
-revealLines();
+});
 </script>
 
 </body>
