@@ -125,15 +125,27 @@ body {
 /* FINAL */
 .final-section {
   padding: 140px 20px;
-  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
+/* each line */
 .final-line {
   font-size: 22px;
-  margin: 30px 0;
+  margin: 28px 0;
   opacity: 0.3;
+  text-align: right;   /* 👈 key fix */
+  line-height: 1.6;
 }
 
+/* spacing between lines (clean rhythm) */
+.final-line:nth-child(2) {
+  margin-top: 40px;
+}
+
+.final-line:nth-child(3) {
+  margin-top: 40px;
+}
 /* FORM */
 .form {
   margin-top: 60px;
@@ -211,7 +223,11 @@ button {
 <section class="final-section">
 
   <div class="final-line split">It doesn’t define you.</div>
-  <div class="final-line split">It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.</div>
+
+  <div class="final-line split">
+    It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.
+  </div>
+
   <div class="final-line split">This is not for everyone.</div>
 
   <div class="form">
@@ -222,6 +238,7 @@ button {
 
   <div class="footer">in development — 2026</div>
 </section>
+
 
 <!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
