@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Find & Align</title>
 
-<title>findandalign</title>
-
-<!-- FONT (clean premium system) -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
-
-<!-- LENIS -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 
 <style>
-
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Inter', sans-serif;
-  background: #f6f6f6;
+  margin: 0;
+  font-family: "TRY Tosh A", Arial, sans-serif;
+  background: #f7f7f7;
   color: #111;
+  overflow-x: hidden;
 }
 
 /* HERO */
@@ -39,52 +23,47 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
-.logo {
-  font-size: 72px;
-  font-weight: 500;
-  letter-spacing: -1px;
+.logo img {
+  width: 260px;
+  opacity: 0;
 }
 
 .tagline {
-  margin-top: 10px;
-  color: #777;
-  font-size: 14px;
+  margin-top: 20px;
+  font-size: 16px;
+  opacity: 0;
 }
 
-/* MOUSE */
+/* SCROLL INDICATOR */
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
-}
-
-.mouse {
   width: 22px;
-  height: 34px;
-  border: 1px solid #aaa;
-  border-radius: 20px;
-  position: relative;
+  height: 36px;
+  border: 1px solid #bbb;
+  border-radius: 12px;
+  opacity: 0;
 }
 
-.mouse::after {
+.scroll-indicator::after {
   content: "";
-  width: 4px;
+  width: 3px;
   height: 6px;
-  background: #aaa;
+  background: #bbb;
   position: absolute;
-  top: 6px;
   left: 50%;
+  top: 8px;
   transform: translateX(-50%);
   border-radius: 2px;
-  animation: scroll 2s infinite;
+  animation: scroll 1.6s infinite;
 }
 
 @keyframes scroll {
-  0% { opacity: 0; transform: translate(-50%, 0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, 10px); }
+  0% {opacity: 0; transform: translate(-50%,0);}
+  50% {opacity: 1;}
+  100% {opacity: 0; transform: translate(-50%,10px);}
 }
 
 /* DIVIDER SECTION */
@@ -92,103 +71,97 @@ body {
   height: 300vh;
 }
 
-.divider-wrap {
+.divider-inner {
   position: sticky;
   top: 0;
   height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 70px;
-
-  width: 60%;
-  margin: auto;
-}
-
-.divider-item {
-  text-align: center;
-}
-
-.line {
-  height: 1px;
-  background: #e8e8e8;
-  margin-bottom: 18px;
-  transform-origin: left;
-}
-
-.divider-text {
-  font-size: 34px;
-  font-weight: 500;
-  color: #aaa;
-}
-
-/* BLOCK */
-.block-section {
-  height: 160vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.block-text {
-  font-size: 38px;
-  width: 60%;
+.divider-content {
+  width: 70%;
+  max-width: 900px;
+}
+
+.line {
+  margin: 60px 0;
+}
+
+.line-text {
+  font-size: 32px;
+  margin-bottom: 14px;
+  color: #dcdcdc;
+  transition: color 0.2s linear;
+}
+
+.line-bar {
+  height: 1px;
+  background: #e5e5e5;
+  overflow: hidden;
+}
+
+.line-fill {
+  height: 100%;
+  width: 0%;
+  background: #111;
+}
+
+/* BLOCK TEXT */
+.block-section {
+  padding: 160px 20px;
   text-align: center;
+}
+
+.block-text {
+  max-width: 850px;
+  margin: auto;
+  font-size: 30px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 /* FINAL */
 .final-section {
-  height: 150vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 50px;
-  align-items: center;
+  padding: 140px 20px;
+  text-align: center;
 }
 
 .final-line {
-  font-size: 28px;
-  color: #aaa;
-  text-align: center;
-  width: 60%;
+  font-size: 22px;
+  margin: 30px 0;
+  opacity: 0.3;
 }
 
 /* FORM */
-.form-section {
-  height: 100vh;
-  text-align: center;
-}
-
 .form {
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 input {
   border: none;
   border-bottom: 1px solid #aaa;
-  background: transparent;
   padding: 10px;
-  width: 220px;
+  width: 240px;
+  background: transparent;
+  font-family: inherit;
 }
 
 button {
-  margin-left: 10px;
-  background: none;
   border: none;
+  border-bottom: 1px solid #111;
+  background: transparent;
+  margin-left: 20px;
   cursor: pointer;
-  font-weight: 500;
+  font-family: inherit;
 }
 
 .footer {
-  display: block;
-  margin-top: 40px;
-  color: #aaa;
+  margin-top: 60px;
   font-size: 12px;
+  opacity: 0.4;
 }
-
 </style>
 </head>
 
@@ -196,153 +169,133 @@ button {
 
 <!-- HERO -->
 <section class="hero">
-  <h1 class="logo">findandalign</h1>
-  <p class="tagline">Symbolic Intelligence for Alignment</p>
-
-  <div class="scroll-indicator">
-    <div class="mouse"></div>
+  <div class="logo">
+    <img src="logo.png" />
   </div>
+  <div class="tagline">Symbolic Intelligence for Alignment</div>
+  <div class="scroll-indicator"></div>
 </section>
 
 <!-- DIVIDER -->
 <section class="divider-section">
-  <div class="divider-wrap">
+  <div class="divider-inner">
+    <div class="divider-content">
 
-    <div class="divider-item">
-      <div class="line"></div>
-      <p class="divider-text">Most people never see how they actually operate.</p>
+      <div class="line">
+        <div class="line-text">Most people never see how they actually operate.</div>
+        <div class="line-bar"><div class="line-fill"></div></div>
+      </div>
+
+      <div class="line">
+        <div class="line-text">Not their patterns. Not their contradictions.</div>
+        <div class="line-bar"><div class="line-fill"></div></div>
+      </div>
+
+      <div class="line">
+        <div class="line-text">Not the forces quietly shaping their decisions.</div>
+        <div class="line-bar"><div class="line-fill"></div></div>
+      </div>
+
     </div>
-
-    <div class="divider-item">
-      <div class="line"></div>
-      <p class="divider-text">Not their patterns. Not their contradictions.</p>
-    </div>
-
-    <div class="divider-item">
-      <div class="line"></div>
-      <p class="divider-text">Not the forces quietly shaping their decisions.</p>
-    </div>
-
   </div>
 </section>
 
 <!-- BLOCK -->
 <section class="block-section">
-  <p class="block-text">
+  <div class="block-text split">
     This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
-  </p>
+  </div>
 </section>
 
 <!-- FINAL -->
 <section class="final-section">
-  <p class="final-line">It doesn’t define you.</p>
-  <p class="final-line">It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.</p>
-  <p class="final-line">This is not for everyone.</p>
-</section>
 
-<!-- FORM -->
-<section class="form-section">
-  <p>Early access is limited to a small group.</p>
+  <div class="final-line split">It doesn’t define you.</div>
+  <div class="final-line split">It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.</div>
+  <div class="final-line split">This is not for everyone.</div>
 
   <div class="form">
-    <input type="email" placeholder="Enter your email">
+    <p>Early access is limited to a small group.</p>
+    <input placeholder="Enter your email"/>
     <button>Request Access</button>
   </div>
 
-  <span class="footer">in development — 2026</span>
+  <div class="footer">in development — 2026</div>
 </section>
 
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/bundled/lenis.min.js"></script>
+
 <script>
+gsap.registerPlugin(ScrollTrigger);
 
-/* GSAP */
-gsap.registerPlugin(ScrollTrigger, SplitText);
+/* SMOOTH SCROLL */
+const lenis = new Lenis({ lerp: 0.06 });
 
-/* LENIS */
-const lenis = new Lenis({ duration: 1.2 });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((t) => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+/* HERO ANIMATION */
+gsap.to(".logo img", { opacity: 1, y: -10, duration: 1 });
+gsap.to(".tagline", { opacity: 0.6, delay: 0.3 });
+gsap.to(".scroll-indicator", { opacity: 1, delay: 0.8 });
 
-/* HERO */
-gsap.from(".logo", {
-  opacity: 0,
-  y: 20,
-  duration: 1.2
-});
+/* DIVIDER (FIXED SMOOTH) */
+document.querySelectorAll(".line").forEach(line => {
+  const fill = line.querySelector(".line-fill");
+  const text = line.querySelector(".line-text");
 
-gsap.from(".tagline", {
-  opacity: 0,
-  y: 10,
-  delay: 0.3,
-  duration: 1
-});
-
-/* DIVIDER */
-document.querySelectorAll(".divider-item").forEach((item) => {
-  const line = item.querySelector(".line");
-  const text = item.querySelector(".divider-text");
-
-  gsap.fromTo(line,
-    { scaleX: 0 },
-    {
-      scaleX: 1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: item,
-        start: "top 70%",
-        end: "top 30%",
-        scrub: true
-      }
+  gsap.to(fill, {
+    width: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: line,
+      start: "top 65%",
+      end: "top 25%",
+      scrub: true
     }
-  );
+  });
 
   gsap.to(text, {
     color: "#111",
-    scrollTrigger: {
-      trigger: item,
-      start: "top 70%",
-      end: "top 30%",
-      scrub: true
-    }
-  });
-});
-
-/* BLOCK TEXT */
-const blockSplit = new SplitText(".block-text", { type: "words" });
-
-gsap.from(blockSplit.words, {
-  opacity: 0,
-  y: 6,
-  stagger: 0.06,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: ".block-section",
-    start: "top 60%",
-    end: "top 20%",
-    scrub: true
-  }
-});
-
-/* FINAL TEXT */
-document.querySelectorAll(".final-line").forEach((line) => {
-  const split = new SplitText(line, { type: "words" });
-
-  gsap.from(split.words, {
-    opacity: 0,
-    y: 6,
-    stagger: 0.05,
+    ease: "none",
     scrollTrigger: {
       trigger: line,
-      start: "top 80%",
-      end: "top 50%",
+      start: "top 65%",
+      end: "top 25%",
       scrub: true
     }
   });
 });
 
+/* WORD SPLIT */
+function splitWords(el) {
+  const words = el.innerText.split(" ");
+  el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+  return el.querySelectorAll(".word");
+}
+
+/* WORD REVEAL (SMOOTH + SLOW) */
+document.querySelectorAll(".split").forEach(el => {
+  const words = splitWords(el);
+
+  gsap.set(words, { opacity: 0.05 });
+
+  gsap.to(words, {
+    opacity: 1,
+    stagger: 0.08,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: el,
+      start: "top 80%",
+      end: "top 40%",
+      scrub: true
+    }
+  });
+});
 </script>
 
 </body>
