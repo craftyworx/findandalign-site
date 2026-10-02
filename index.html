@@ -31,6 +31,10 @@ body {
   flex-direction: column;
 }
 
+.logo {
+  opacity: 0;
+}
+
 .logo img {
   width: 280px;
 }
@@ -38,7 +42,7 @@ body {
 .tagline {
   margin-top: 20px;
   font-size: 16px;
-  opacity: 0.7;
+  opacity: 0;
   font-weight: 500;
 }
 
@@ -49,7 +53,7 @@ body {
   bottom: 40px;
   width: 18px;
   height: 30px;
-  border: 1px solid #aaa;
+  border: 1px solid #ccc;
   border-radius: 10px;
 }
 
@@ -60,7 +64,7 @@ body {
   left: 50%;
   width: 3px;
   height: 6px;
-  background: #aaa;
+  background: #ccc;
   transform: translateX(-50%);
   animation: scroll 1.5s infinite;
 }
@@ -70,39 +74,33 @@ body {
   100% { opacity: 0; top: 16px; }
 }
 
-/* CINEMATIC SECTION */
+/* DIVIDER SECTION */
 
 .section {
   height: 300vh;
-  position: relative;
 }
 
 .sticky {
   position: sticky;
   top: 0;
   height: 100vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-/* CONTENT */
 
 .wrapper {
   width: 70%;
   max-width: 900px;
 }
 
-/* LINE BLOCK */
-
 .block {
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 
 .divider {
   height: 1px;
-  background: #ddd;
+  background: #eeeeee; /* lighter */
   margin-bottom: 14px;
   overflow: hidden;
 }
@@ -119,7 +117,7 @@ body {
   line-height: 1.4;
 }
 
-/* NEXT SECTION */
+/* BIG TEXT */
 
 .next {
   padding: 160px 20px;
@@ -132,6 +130,49 @@ body {
   font-size: 40px;
   line-height: 1.4;
   opacity: 0;
+}
+
+/* FINAL TEXT */
+
+.final {
+  padding: 140px 20px;
+  text-align: center;
+}
+
+.final p {
+  max-width: 700px;
+  margin: 20px auto;
+  font-size: 20px;
+  opacity: 0;
+}
+
+/* FORM */
+
+.form {
+  margin-top: 40px;
+  opacity: 0;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-family: inherit;
+  width: 220px;
+}
+
+button {
+  border: none;
+  border-bottom: 1px solid #111;
+  background: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 60px;
+  font-size: 12px;
+  opacity: 0.4;
 }
 
 </style>
@@ -148,11 +189,9 @@ body {
   <div class="mouse"></div>
 </section>
 
-<!-- CINEMATIC SECTION -->
+<!-- DIVIDER -->
 <section class="section">
-
   <div class="sticky">
-
     <div class="wrapper">
 
       <div class="block">
@@ -171,21 +210,54 @@ body {
       </div>
 
     </div>
-
   </div>
-
 </section>
 
-<!-- NEXT FLOW -->
+<!-- BIG TEXT -->
 <section class="next">
   <div class="big-text">
     This system maps the underlying structure of how you think, react, and move through life — with a level of precision most people aren’t ready for.
   </div>
 </section>
 
+<!-- FINAL -->
+<section class="final">
+
+  <p class="reveal">It doesn’t define you.</p>
+  <p class="reveal">It shows you where you’re misaligned, what’s driving it, and what changes when you become aware of it.</p>
+  <p class="reveal">This is not for everyone.</p>
+
+  <div class="form">
+    <p>Early access is limited to a small group.</p>
+    <input placeholder="Enter your email"/>
+    <button>Request Access</button>
+  </div>
+
+  <div class="footer">
+    in development — 2026
+  </div>
+
+</section>
+
 <script>
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* HERO INTRO */
+
+gsap.to(".logo", {
+  opacity: 1,
+  duration: 1.2,
+  ease: "power2.out"
+});
+
+gsap.to(".tagline", {
+  opacity: 1,
+  delay: 0.6,
+  duration: 1.2
+});
+
+/* DIVIDER SECTION */
 
 const fills = gsap.utils.toArray(".fill");
 const texts = gsap.utils.toArray(".text");
@@ -195,41 +267,58 @@ let tl = gsap.timeline({
     trigger: ".section",
     start: "top top",
     end: "bottom bottom",
-    scrub: 1.2, // smooth even on jerky scroll
+    scrub: 1.5,
     pin: ".sticky"
   }
 });
 
-/* SEQUENTIAL CINEMATIC REVEAL */
-
 fills.forEach((fill, i) => {
-
-  tl.to(fill, {
-    width: "100%",
-    duration: 1.2,
-    ease: "power2.out"
-  })
-
-  .to(texts[i], {
-    color: "#111",
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=1"); // overlap for smoothness
-
+  tl.to(fill, { width: "100%", duration: 1.2 })
+    .to(texts[i], { color: "#111", duration: 1 }, "-=1");
 });
 
-/* NEXT SECTION REVEAL */
+/* BIG TEXT */
 
 gsap.to(".big-text", {
   scrollTrigger: {
     trigger: ".next",
     start: "top 80%",
     end: "top 40%",
-    scrub: 1
+    scrub: 1.2
   },
   y: -40,
+  opacity: 1
+});
+
+/* FINAL TEXT WORD REVEAL */
+
+document.querySelectorAll(".reveal").forEach(p => {
+  let words = p.innerText.split(" ");
+  p.innerHTML = words.map(w => `<span>${w}</span>`).join(" ");
+  
+  gsap.from(p.querySelectorAll("span"), {
+    scrollTrigger: {
+      trigger: p,
+      start: "top 85%",
+      toggleActions: "play none none none"
+    },
+    opacity: 0,
+    y: 10,
+    stagger: 0.05,
+    duration: 0.6
+  });
+});
+
+/* FORM */
+
+gsap.to(".form", {
+  scrollTrigger: {
+    trigger: ".form",
+    start: "top 85%"
+  },
   opacity: 1,
-  ease: "power2.out"
+  y: -10,
+  duration: 1
 });
 
 </script>
