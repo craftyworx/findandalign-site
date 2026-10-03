@@ -47,7 +47,7 @@ body {
 /* VERTICAL PROGRESS SECTION */
 .vp-section {
   position: relative;
-  height: 400vh;
+  height: 300vh; /* Adjusted height */
 }
 
 .vp-sticky {
@@ -55,6 +55,7 @@ body {
   top: 0;
   height: 100vh;
   display: flex;
+  align-items: center; /* Center vertically */
   overflow: hidden;
 }
 
@@ -72,14 +73,15 @@ body {
   position: absolute;
   top: 50%;
   left: 6vw;
-  transform: translateY(100%);
-  width: 80%;
+  transform: translateY(100%); /* Start below */
+  width: 75%;
   font-size: clamp(40px, 5.5vw, 90px);
   line-height: 1.1;
   font-weight: 400;
   letter-spacing: -0.02em;
   color: #111;
   opacity: 0;
+  margin: 0;
 }
 
 .vp-heading .word {
@@ -92,12 +94,12 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Center the line vertically */
 }
 
 .vp-progress-line {
   width: 1px;
-  height: 40vh;
+  height: 50vh; /* Line height */
   background: #e0e0e0;
   position: relative;
 }
@@ -169,13 +171,13 @@ body {
   transform: translateY(20px);
 }
 
-/* FINAL SECTION */
-.final-section {
+/* FINAL ANIMATION SECTION (Sticky) */
+.final-anim-section {
   position: relative;
-  height: 500vh;
+  height: 200vh; /* Space to scroll through animations */
 }
 
-.final-sticky {
+.final-anim-sticky {
   position: sticky;
   top: 0;
   height: 100vh;
@@ -184,14 +186,15 @@ body {
   justify-content: center;
   align-items: center;
   padding: 0 24px;
+  text-align: center;
 }
 
 .final-stack {
   position: relative;
   width: 100%;
   max-width: 900px;
-  height: 200px;
-  margin-bottom: 60px;
+  height: 150px; /* Fixed height for cycling text */
+  margin-bottom: 40px;
 }
 
 .final-line {
@@ -200,13 +203,13 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  text-align: center;
   font-size: clamp(32px, 4.5vw, 64px);
   line-height: 1.2;
   letter-spacing: -0.02em;
   font-weight: 400;
   opacity: 0;
   filter: blur(12px);
+  margin: 0;
 }
 
 .final-line--small {
@@ -219,7 +222,6 @@ body {
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 400;
-  text-align: center;
   margin: 0 0 20px 0;
 }
 
@@ -231,12 +233,18 @@ body {
 .final-sub {
   font-size: clamp(18px, 2.4vw, 32px);
   color: #555;
-  text-align: center;
   opacity: 0;
+  margin: 0;
 }
 
-/* FORM */
-.form { margin-top: 80px; }
+/* FINAL FORM SECTION (Scrolls in naturally) */
+.final-form-section {
+  padding: clamp(60px, 10vh, 100px) 24px clamp(40px, 6vh, 80px);
+  text-align: center;
+  background: #f7f7f7;
+}
+
+.form { margin-top: 40px; }
 .form-note {
   font-size: 14px;
   color: #666;
@@ -298,7 +306,7 @@ body {
 /* MOBILE */
 @media (max-width: 640px) {
   .vp-text-container { padding-left: 24px; }
-  .vp-heading { left: 24px; width: 75%; font-size: clamp(32px, 8vw, 48px); }
+  .vp-heading { left: 24px; width: 70%; font-size: clamp(32px, 8vw, 48px); }
   .final-stack { height: 180px; }
   .form-row {
     flex-direction: column;
@@ -376,9 +384,9 @@ body {
   <p class="dossier-sub">A baseline schematic of how you process pressure, where conflict originates, and when it intensifies. By integrating converging systems of pattern intelligence, it translates hidden drivers into something you can observe, track, and work with directly.</p>
 </section>
 
-<!-- FINAL SECTION -->
-<section class="final-section">
-  <div class="final-sticky">
+<!-- FINAL ANIMATION SECTION -->
+<section class="final-anim-section">
+  <div class="final-anim-sticky">
     <div class="final-stack">
       <div class="final-line" data-final="0">It doesn't put you in a box.</div>
       <div class="final-line" data-final="1">It reveals where misalignment is costing you — and where leverage actually exists.</div>
@@ -387,18 +395,21 @@ body {
     
     <h2 class="final-reveal">Not for everyone.</h2>
     <p class="final-sub">Access is limited by design.</p>
-
-    <div class="form">
-      <p class="form-note">Request access to the first cohort.</p>
-      <div class="form-row">
-        <input type="email" placeholder="Enter your email" aria-label="Email address"/>
-        <button type="button">Apply for Access</button>
-      </div>
-      <p class="form-success">Thank you — we'll be in touch.</p>
-    </div>
-
-    <div class="footer">in development — 2026</div>
   </div>
+</section>
+
+<!-- FINAL FORM SECTION -->
+<section class="final-form-section">
+  <div class="form">
+    <p class="form-note">Request access to the first cohort.</p>
+    <div class="form-row">
+      <input type="email" placeholder="Enter your email" aria-label="Email address"/>
+      <button type="button">Apply for Access</button>
+    </div>
+    <p class="form-success">Thank you — we'll be in touch.</p>
+  </div>
+
+  <div class="footer">in development — 2026</div>
 </section>
 
 <!-- SCRIPTS -->
@@ -425,13 +436,12 @@ if (!prefersReduced) {
   /* VERTICAL PROGRESS SECTION */
   const headings = gsap.utils.toArray(".vp-heading");
   
-  // Split words for each heading
+  // Split words
   headings.forEach(heading => {
     const words = heading.innerText.trim().split(/\s+/);
     heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
   });
 
-  // Main timeline for VP section
   const vpTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".vp-section",
@@ -441,39 +451,42 @@ if (!prefersReduced) {
     }
   });
 
-  // Progress bar fills throughout
+  // Progress bar
   vpTl.to(".vp-progress-fill", { height: "100%", duration: 1, ease: "none" }, 0);
 
-  // Each heading slides up and reveals words
+  // Headings animation
+  const totalDuration = 1;
+  const segmentDuration = totalDuration / headings.length;
+
   headings.forEach((heading, i) => {
     const words = heading.querySelectorAll(".word");
-    const startTime = i * 0.2;
-    const duration = 0.2;
+    const startTime = i * segmentDuration;
+    const exitTime = startTime + segmentDuration - 0.05; // Start exit just before next enters
     
-    // Slide up and fade in
+    // Enter
     vpTl.to(heading, {
       opacity: 1,
       y: 0,
-      duration: duration,
+      duration: segmentDuration * 0.4,
       ease: "power2.out"
     }, startTime);
     
     // Word reveal
     vpTl.to(words, {
       opacity: 1,
-      stagger: 0.02,
-      duration: duration * 0.8,
+      stagger: 0.01,
+      duration: segmentDuration * 0.3,
       ease: "none"
-    }, startTime + 0.05);
+    }, startTime + 0.02);
     
-    // Slide out (except last)
+    // Exit (slide up and fade)
     if (i < headings.length - 1) {
       vpTl.to(heading, {
         opacity: 0,
         y: "-100%",
-        duration: duration,
+        duration: segmentDuration * 0.4,
         ease: "power2.in"
-      }, startTime + duration + 0.05);
+      }, exitTime);
     }
   });
 
@@ -487,19 +500,18 @@ if (!prefersReduced) {
     scrollTrigger: { trigger: ".dossier-section", start: "top 75%", toggleActions: "play none none none" }
   });
 
-  /* FINAL SECTION */
+  /* FINAL ANIMATION SECTION */
   const finalLines = gsap.utils.toArray(".final-line[data-final]");
   
-  // Split "Not for everyone" into words
+  // Split "Not for everyone"
   const notForEveryone = document.querySelector(".final-reveal");
   const words = notForEveryone.innerText.trim().split(/\s+/);
   notForEveryone.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
   const revealWords = notForEveryone.querySelectorAll(".word");
 
-  // Timeline for final section
   const finalTl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".final-section",
+      trigger: ".final-anim-section",
       start: "top top",
       end: "bottom bottom",
       scrub: 0.5
@@ -507,54 +519,62 @@ if (!prefersReduced) {
   });
 
   // Cycle through final lines
+  const cycleDuration = 0.4;
   finalLines.forEach((line, i) => {
     const startTime = i * 0.15;
-    const duration = 0.12;
     
     // Fade in
     finalTl.to(line, {
       opacity: 1,
       filter: "blur(0px)",
-      duration: duration,
+      duration: 0.1,
       ease: "power2.out"
     }, startTime);
     
-    // Fade out (except last)
+    // Fade out
     if (i < finalLines.length - 1) {
       finalTl.to(line, {
         opacity: 0,
         filter: "blur(12px)",
-        duration: duration,
+        duration: 0.1,
         ease: "power2.in"
-      }, startTime + duration + 0.03);
+      }, startTime + 0.12);
+    } else {
+      // Last line stays a bit longer
+      finalTl.to(line, {
+        opacity: 0,
+        filter: "blur(12px)",
+        duration: 0.1,
+        ease: "power2.in"
+      }, startTime + 0.2);
     }
   });
 
-  // Reveal "Not for everyone" word by word
-  const notStartTime = finalLines.length * 0.15;
+  // Reveal "Not for everyone"
+  const notStartTime = 0.5;
   finalTl.to(revealWords, {
     opacity: 1,
-    stagger: 0.03,
-    duration: 0.15,
+    stagger: 0.02,
+    duration: 0.2,
     ease: "power2.out"
   }, notStartTime);
 
   // Reveal "Access is limited by design"
   finalTl.to(".final-sub", {
     opacity: 1,
-    duration: 0.12,
+    duration: 0.15,
     ease: "power2.out"
-  }, notStartTime + 0.15);
+  }, notStartTime + 0.2);
 
-  /* FORM REVEAL */
+  /* FORM REVEAL (Now in its own section) */
   gsap.to(".form-note", {
     opacity: 1, duration: 0.8, ease: "power2.out",
-    scrollTrigger: { trigger: ".form", start: "top 85%", toggleActions: "play none none none" }
+    scrollTrigger: { trigger: ".final-form-section", start: "top 80%", toggleActions: "play none none none" }
   });
   gsap.fromTo(".form-row",
     { opacity: 0, y: 12 },
     { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: "power2.out",
-      scrollTrigger: { trigger: ".form", start: "top 85%", toggleActions: "play none none none" } });
+      scrollTrigger: { trigger: ".final-form-section", start: "top 80%", toggleActions: "play none none none" } });
 
 } else {
   gsap.set(".form-row", { opacity: 1 });
