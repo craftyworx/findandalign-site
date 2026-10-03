@@ -71,7 +71,9 @@ body {
 
 .vp-heading {
   position: absolute;
-  top: calc(60% - 90px); /* Shifted up by 80px */
+  /* Anchors the TOP of the text 35% down the screen. 
+     (Line starts at 25vh, 10vh below that is 35vh) */
+  top: 35vh; 
   left: 6vw;
   transform: translateY(100%);
   width: 75%;
@@ -306,7 +308,12 @@ body {
 /* MOBILE */
 @media (max-width: 640px) {
   .vp-text-container { padding-left: 24px; }
-  .vp-heading { left: 24px; width: 70%; font-size: clamp(32px, 8vw, 48px); top: calc(50% - 40px); }
+  .vp-heading { 
+    left: 24px; 
+    width: 70%; 
+    font-size: clamp(32px, 8vw, 48px); 
+    top: 30vh; /* Adjusted for mobile proportion */
+  }
   .final-stack { height: 180px; }
   .form-row {
     flex-direction: column;
