@@ -47,7 +47,7 @@ body {
 /* VERTICAL PROGRESS SECTION */
 .vp-section {
   position: relative;
-  height: 300vh;
+  height: 400vh;
 }
 
 .vp-sticky {
@@ -71,11 +71,9 @@ body {
 
 .vp-heading {
   position: absolute;
-  /* Anchors the TOP of the text 35% down the screen. 
-     (Line starts at 25vh, 10vh below that is 35vh) */
   top: 25vh; 
   left: 6vw;
-  transform: translateY(100%);
+  transform: translateY(30px);
   width: 75%;
   font-size: clamp(40px, 5.5vw, 90px);
   line-height: 1.1;
@@ -83,12 +81,14 @@ body {
   letter-spacing: -0.02em;
   color: #111;
   opacity: 0;
+  filter: blur(8px);
   margin: 0;
 }
 
-.vp-heading .word {
+.vp-heading .word, .dossier-title .word, .final-reveal .word {
   display: inline-block;
   opacity: 0;
+  transform: translateY(20px);
 }
 
 .vp-progress-track {
@@ -117,7 +117,7 @@ body {
 
 /* MARQUEE SECTION */
 .marquee-section {
-  padding: 4vh 0;
+  padding: 6vh 0;
   overflow: hidden;
   background: #f7f7f7;
 }
@@ -125,7 +125,7 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 35s linear infinite;
+  animation: marquee 50s linear infinite;
 }
 
 .marquee-content {
@@ -147,7 +147,7 @@ body {
 
 /* DOSSIER SECTION */
 .dossier-section {
-  padding: clamp(100px, 12vh, 160px) 24px;
+  padding: clamp(80px, 10vh, 120px) 24px clamp(40px, 5vh, 60px);
   text-align: center;
   max-width: 900px;
   margin: 0 auto;
@@ -159,8 +159,7 @@ body {
   font-weight: 400;
   letter-spacing: -0.01em;
   margin: 0 0 36px 0;
-  opacity: 0;
-  transform: translateY(20px);
+  /* Removed filter: blur(8px) so the word animation works cleanly */
 }
 
 .dossier-sub {
@@ -170,13 +169,14 @@ body {
   max-width: 620px;
   margin: 0 auto;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
+  filter: blur(8px);
 }
 
-/* FINAL ANIMATION SECTION (Sticky) */
+/* FINAL ANIMATION SECTION */
 .final-anim-section {
   position: relative;
-  height: 200vh;
+  height: 400vh;
 }
 
 .final-anim-sticky {
@@ -224,29 +224,25 @@ body {
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 400;
-  margin: 0 0 20px 0;
-}
-
-.final-reveal .word {
-  display: inline-block;
-  opacity: 0;
+  margin: 0 0 10px 0;
 }
 
 .final-sub {
   font-size: clamp(18px, 2.4vw, 32px);
   color: #555;
   opacity: 0;
-  margin: 0;
+  transform: translateY(20px);
+  margin: 0 0 0px 0; /* Reduced to 0 to pull form closer */
 }
 
-/* FINAL FORM SECTION (Scrolls in naturally) */
+/* FINAL FORM SECTION */
 .final-form-section {
-  padding: clamp(60px, 10vh, 100px) 24px clamp(40px, 6vh, 80px);
+  padding: clamp(20px, 3vh, 40px) 24px clamp(60px, 8vh, 100px); /* Reduced top padding */
   text-align: center;
   background: #f7f7f7;
 }
 
-.form { margin-top: 40px; }
+.form { margin-top: 10px; /* Reduced to close the gap */ }
 .form-note {
   font-size: 14px;
   color: #666;
@@ -312,7 +308,7 @@ body {
     left: 24px; 
     width: 70%; 
     font-size: clamp(32px, 8vw, 48px); 
-    top: 30vh; /* Adjusted for mobile proportion */
+    top: 20vh; 
   }
   .final-stack { height: 180px; }
   .form-row {
@@ -328,14 +324,11 @@ body {
 /* REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {
   .logo img, .tagline { opacity: 1 !important; }
-  .vp-heading { opacity: 1 !important; transform: translateY(0) !important; }
-  .vp-heading .word { opacity: 1 !important; }
+  .vp-heading, .dossier-title, .final-reveal { opacity: 1 !important; transform: translateY(0) !important; filter: none !important; }
+  .vp-heading .word, .dossier-title .word, .final-reveal .word { opacity: 1 !important; transform: none !important; }
   .vp-progress-fill { height: 100% !important; }
   .marquee-track { animation: none; }
-  .dossier-title, .dossier-sub { opacity: 1 !important; transform: none !important; }
-  .final-line { opacity: 1 !important; filter: none !important; }
-  .final-reveal .word { opacity: 1 !important; }
-  .final-sub, .form-note, .form-row { opacity: 1 !important; }
+  .dossier-sub, .final-line, .final-sub, .form-note, .form-row { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 </style>
 </head>
@@ -431,19 +424,17 @@ const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").mat
 
 if (!prefersReduced) {
   /* SMOOTH SCROLL */
-  const lenis = new Lenis({ lerp: 0.08 });
+  const lenis = new Lenis({ lerp: 0.08 }); 
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 
   /* HERO */
-  gsap.fromTo(".logo img", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
-  gsap.to(".tagline", { opacity: 1, duration: 1, delay: 0.4, ease: "power2.out" });
+  gsap.fromTo(".logo img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" });
+  gsap.to(".tagline", { opacity: 1, duration: 1.5, delay: 0.5, ease: "power3.out" });
 
   /* VERTICAL PROGRESS SECTION */
   const headings = gsap.utils.toArray(".vp-heading");
-  
-  // Split words
   headings.forEach(heading => {
     const words = heading.innerText.trim().split(/\s+/);
     heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
@@ -454,63 +445,61 @@ if (!prefersReduced) {
       trigger: ".vp-section",
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.5
+      scrub: 1.5
     }
   });
 
-  // Progress bar
   vpTl.to(".vp-progress-fill", { height: "100%", duration: 1, ease: "none" }, 0);
-
-  // Headings animation
-  const totalDuration = 1;
-  const segmentDuration = totalDuration / headings.length;
 
   headings.forEach((heading, i) => {
     const words = heading.querySelectorAll(".word");
-    const startTime = i * segmentDuration;
-    const exitTime = startTime + segmentDuration - 0.05;
-    
-    // Enter
-    vpTl.to(heading, {
-      opacity: 1,
-      y: 0,
-      duration: segmentDuration * 0.4,
-      ease: "power2.out"
-    }, startTime);
-    
-    // Word reveal
-    vpTl.to(words, {
-      opacity: 1,
-      stagger: 0.01,
-      duration: segmentDuration * 0.3,
-      ease: "none"
-    }, startTime + 0.02);
-    
-    // Exit (slide up and fade)
+    const t = i * 1.2;
+
+    vpTl.to(heading, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, t);
+    vpTl.to(words, { opacity: 1, y: 0, stagger: 0.04, duration: 0.4, ease: "power2.out" }, t + 0.05);
+
     if (i < headings.length - 1) {
-      vpTl.to(heading, {
-        opacity: 0,
-        y: "-100%",
-        duration: segmentDuration * 0.4,
-        ease: "power2.in"
-      }, exitTime);
+      vpTl.to(heading, { opacity: 0, y: -20, filter: "blur(8px)", duration: 0.4, ease: "power2.in" }, t + 0.8);
     }
   });
 
-  /* DOSSIER FADE IN */
-  gsap.to(".dossier-title", {
-    opacity: 1, y: 0, duration: 1, ease: "power2.out",
-    scrollTrigger: { trigger: ".dossier-section", start: "top 75%", toggleActions: "play none none none" }
+  /* DOSSIER SECTION - WORD BY WORD REVEAL */
+  const dossierTitle = document.querySelector(".dossier-title");
+  const dWords = dossierTitle.innerText.trim().split(/\s+/);
+  dossierTitle.innerHTML = dWords.map(w => `<span class="word">${w}</span>`).join(" ");
+  
+  // Word by word reveal for the title
+  gsap.to(".dossier-title .word", {
+    opacity: 1,
+    y: 0,
+    stagger: 0.03,
+    duration: 0.8,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".dossier-section",
+      start: "top 70%",
+      toggleActions: "play none none none"
+    }
   });
+
+  // Paragraph fades in as a whole block, slightly delayed
   gsap.to(".dossier-sub", {
-    opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out",
-    scrollTrigger: { trigger: ".dossier-section", start: "top 75%", toggleActions: "play none none none" }
+    opacity: 1, 
+    y: 0, 
+    filter: "blur(0px)", 
+    duration: 1.2, 
+    delay: 0.4, 
+    ease: "power2.out",
+    scrollTrigger: { 
+      trigger: ".dossier-section", 
+      start: "top 70%", 
+      toggleActions: "play none none none" 
+    }
   });
 
   /* FINAL ANIMATION SECTION */
   const finalLines = gsap.utils.toArray(".final-line[data-final]");
   
-  // Split "Not for everyone"
   const notForEveryone = document.querySelector(".final-reveal");
   const words = notForEveryone.innerText.trim().split(/\s+/);
   notForEveryone.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
@@ -521,64 +510,34 @@ if (!prefersReduced) {
       trigger: ".final-anim-section",
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.5
+      scrub: 1.5
     }
   });
 
-  // Cycle through final lines
   finalLines.forEach((line, i) => {
-    const startTime = i * 0.15;
+    const t = i * 1.2;
     
-    // Fade in
-    finalTl.to(line, {
-      opacity: 1,
-      filter: "blur(0px)",
-      duration: 0.1,
-      ease: "power2.out"
-    }, startTime);
-    
-    // Fade out
+    finalTl.to(line, { opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, t);
+
     if (i < finalLines.length - 1) {
-      finalTl.to(line, {
-        opacity: 0,
-        filter: "blur(12px)",
-        duration: 0.1,
-        ease: "power2.in"
-      }, startTime + 0.12);
+      finalTl.to(line, { opacity: 0, filter: "blur(12px)", duration: 0.4, ease: "power2.in" }, t + 0.8);
     } else {
-      finalTl.to(line, {
-        opacity: 0,
-        filter: "blur(12px)",
-        duration: 0.1,
-        ease: "power2.in"
-      }, startTime + 0.2);
+      finalTl.to(line, { opacity: 0, filter: "blur(12px)", duration: 0.4, ease: "power2.in" }, t + 1.0);
     }
   });
 
-  // Reveal "Not for everyone"
-  const notStartTime = 0.5;
-  finalTl.to(revealWords, {
-    opacity: 1,
-    stagger: 0.02,
-    duration: 0.2,
-    ease: "power2.out"
-  }, notStartTime);
-
-  // Reveal "Access is limited by design"
-  finalTl.to(".final-sub", {
-    opacity: 1,
-    duration: 0.15,
-    ease: "power2.out"
-  }, notStartTime + 0.2);
+  const notStartTime = 3.8;
+  finalTl.to(revealWords, { opacity: 1, y: 0, stagger: 0.05, duration: 0.5, ease: "power2.out" }, notStartTime);
+  finalTl.to(".final-sub", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, notStartTime + 0.5);
 
   /* FORM REVEAL */
   gsap.to(".form-note", {
-    opacity: 1, duration: 0.8, ease: "power2.out",
+    opacity: 1, duration: 1, ease: "power2.out",
     scrollTrigger: { trigger: ".final-form-section", start: "top 80%", toggleActions: "play none none none" }
   });
   gsap.fromTo(".form-row",
-    { opacity: 0, y: 12 },
-    { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: "power2.out",
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out",
       scrollTrigger: { trigger: ".final-form-section", start: "top 80%", toggleActions: "play none none none" } });
 
 } else {
