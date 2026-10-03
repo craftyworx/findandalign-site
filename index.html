@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>find & align - A Symbolic Behavioral Intelligence System </title>
+<title>Find & Align</title>
 
 <link href="https://db.onlinewebfonts.com/c/07c934c44a647599ed219ac96cf806b2?family=TRY+Tosh+A" rel="stylesheet">
 <link href="https://db.onlinewebfonts.com/c/485cb942b643ee12f399edad1714b47e?family=TRY+Tosh+B+Medium" rel="stylesheet">
@@ -47,7 +47,7 @@ body {
 /* VERTICAL PROGRESS SECTION */
 .vp-section {
   position: relative;
-  height: 300vh; /* Adjusted height */
+  height: 300vh;
 }
 
 .vp-sticky {
@@ -55,7 +55,7 @@ body {
   top: 0;
   height: 100vh;
   display: flex;
-  align-items: center; /* Center vertically */
+  align-items: center;
   overflow: hidden;
 }
 
@@ -71,9 +71,9 @@ body {
 
 .vp-heading {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 80px); /* Shifted up by 80px */
   left: 6vw;
-  transform: translateY(100%); /* Start below */
+  transform: translateY(100%);
   width: 75%;
   font-size: clamp(40px, 5.5vw, 90px);
   line-height: 1.1;
@@ -94,12 +94,12 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; /* Center the line vertically */
+  align-items: center;
 }
 
 .vp-progress-line {
   width: 1px;
-  height: 50vh; /* Line height */
+  height: 50vh;
   background: #e0e0e0;
   position: relative;
 }
@@ -174,7 +174,7 @@ body {
 /* FINAL ANIMATION SECTION (Sticky) */
 .final-anim-section {
   position: relative;
-  height: 200vh; /* Space to scroll through animations */
+  height: 200vh;
 }
 
 .final-anim-sticky {
@@ -193,7 +193,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 900px;
-  height: 150px; /* Fixed height for cycling text */
+  height: 150px;
   margin-bottom: 40px;
 }
 
@@ -306,7 +306,7 @@ body {
 /* MOBILE */
 @media (max-width: 640px) {
   .vp-text-container { padding-left: 24px; }
-  .vp-heading { left: 24px; width: 70%; font-size: clamp(32px, 8vw, 48px); }
+  .vp-heading { left: 24px; width: 70%; font-size: clamp(32px, 8vw, 48px); top: calc(50% - 40px); }
   .final-stack { height: 180px; }
   .form-row {
     flex-direction: column;
@@ -461,7 +461,7 @@ if (!prefersReduced) {
   headings.forEach((heading, i) => {
     const words = heading.querySelectorAll(".word");
     const startTime = i * segmentDuration;
-    const exitTime = startTime + segmentDuration - 0.05; // Start exit just before next enters
+    const exitTime = startTime + segmentDuration - 0.05;
     
     // Enter
     vpTl.to(heading, {
@@ -519,7 +519,6 @@ if (!prefersReduced) {
   });
 
   // Cycle through final lines
-  const cycleDuration = 0.4;
   finalLines.forEach((line, i) => {
     const startTime = i * 0.15;
     
@@ -540,7 +539,6 @@ if (!prefersReduced) {
         ease: "power2.in"
       }, startTime + 0.12);
     } else {
-      // Last line stays a bit longer
       finalTl.to(line, {
         opacity: 0,
         filter: "blur(12px)",
@@ -566,7 +564,7 @@ if (!prefersReduced) {
     ease: "power2.out"
   }, notStartTime + 0.2);
 
-  /* FORM REVEAL (Now in its own section) */
+  /* FORM REVEAL */
   gsap.to(".form-note", {
     opacity: 1, duration: 0.8, ease: "power2.out",
     scrollTrigger: { trigger: ".final-form-section", start: "top 80%", toggleActions: "play none none none" }
