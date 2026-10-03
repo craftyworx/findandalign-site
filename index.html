@@ -10,7 +10,6 @@
 
 <style>
 * { box-sizing: border-box; }
-
 html { scroll-behavior: auto; }
 
 body {
@@ -34,130 +33,93 @@ body {
   position: relative;
   padding: 0 24px;
 }
-
-.logo img {
-  width: 260px;
-  max-width: 70vw;
-  height: auto;
-  opacity: 0;
-}
-
+.logo img { width: 220px; max-width: 60vw; height: auto; opacity: 0; }
 .tagline {
-  margin-top: 26px;
-  font-size: 16px;
-  letter-spacing: 0.02em;
+  margin-top: 24px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   text-align: center;
   opacity: 0;
-  font-family: "TRY Tosh B Medium", sans-serif;
+  color: #555;
 }
 
-/* SCROLL INDICATOR */
-.scroll-indicator {
-  position: absolute;
-  bottom: max(40px, env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  width: 22px;
-  height: 36px;
-  border: 1px solid #bbb;
-  border-radius: 12px;
-  opacity: 0;
-}
-
-.scroll-indicator::after {
-  content: "";
-  width: 3px;
-  height: 6px;
-  background: #bbb;
-  position: absolute;
-  left: 50%;
-  top: 8px;
-  transform: translateX(-50%);
-  border-radius: 2px;
-  animation: scroll 1.6s infinite;
-}
-
-@keyframes scroll {
-  0% { opacity: 0; transform: translate(-50%, 0); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, 10px); }
-}
-
-/* PINNED INTRO SECTION (Huge Text + Vertical Line) */
-.pinned-intro {
-  height: 100vh;
-  height: 100svh;
-  position: relative;
+/* VERTICAL PROGRESS SECTION */
+.vp-section {
   display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.intro-content {
-  width: 85%;
-  padding-left: 5vw;
+  min-height: 250vh;
   position: relative;
-  z-index: 2;
 }
 
-.huge-text {
-  font-size: clamp(48px, 6.5vw, 110px);
+.vp-text-wrapper {
+  width: 85%;
+  padding: 20vh 5vw 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.vp-heading {
+  font-size: clamp(42px, 6.5vw, 110px);
   line-height: 1.05;
-  font-weight: 400; /* Tosh A is already distinct */
-  letter-spacing: -0.02em;
-  margin: 0;
+  font-weight: 400;
+  margin: 0 0 1.2em 0;
+  letter-spacing: -0.025em;
+  color: #111;
 }
 
-.huge-text .word {
-  opacity: 0.1; /* Starts very faint */
+.vp-heading .word {
   display: inline-block;
+  opacity: 0; /* Start completely invisible */
 }
 
-/* Vertical Progress Line */
-.vertical-progress-container {
-  position: absolute;
-  right: 8vw;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 60vh;
+.vp-progress-track {
+  width: 15%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20vh 0;
+}
+
+.vp-progress-line-bg {
   width: 1px;
   background: #e0e0e0;
-  z-index: 1;
+  position: relative;
+  flex-grow: 1;
 }
 
-.vertical-progress-fill {
+.vp-progress-fill {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; right: 0;
   background: #111;
-  transform: scaleY(0);
-  transform-origin: top center;
+  height: 0%;
 }
 
 /* MARQUEE SECTION */
 .marquee-section {
-  padding: 60px 0;
+  padding: 6vh 0;
   overflow: hidden;
-  white-space: nowrap;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
   background: #f7f7f7;
 }
 
 .marquee-track {
-  display: inline-block;
-  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
 }
 
-.marquee-text {
+.marquee-content {
+  display: flex;
+  white-space: nowrap;
   font-family: "TRY Tosh B Medium", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.1em;
+  font-size: clamp(14px, 1.8vw, 24px); /* Smaller text */
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #111;
-  padding-right: 50px;
+  padding-right: 2rem;
+  color: #888; /* Faded grey */
 }
 
 @keyframes marquee {
@@ -165,7 +127,7 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-/* ORIGIN DOSSIER SECTION */
+/* DOSSIER SECTION */
 .dossier-section {
   padding: clamp(120px, 15vh, 180px) 24px;
   text-align: center;
@@ -173,70 +135,84 @@ body {
   margin: 0 auto;
 }
 
-.dossier-headline {
+.dossier-title {
   font-size: clamp(24px, 3vw, 42px);
-  line-height: 1.2;
-  margin-bottom: 40px;
+  line-height: 1.3;
   font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 40px 0;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-.dossier-headline strong {
-  font-family: "TRY Tosh B Medium", sans-serif;
-  font-weight: 500;
-}
-
-.dossier-body {
-  font-size: clamp(16px, 1.2vw, 19px);
+.dossier-sub {
+  font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.6;
   color: #444;
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-/* FINAL SECTION */
+/* FINAL SECTION - BLUR/FADE TRANSITIONS */
 .final-section {
-  padding: clamp(100px, 16vh, 160px) 24px clamp(80px, 12vh, 120px);
-  max-width: 1000px;
+  padding: clamp(100px, 15vh, 160px) 24px clamp(60px, 10vh, 100px);
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 
-.final-huge {
-  font-size: clamp(60px, 10vw, 140px);
-  line-height: 1;
-  margin: 0 0 40px 0;
-  letter-spacing: -0.03em;
-}
-
-.final-huge .word {
+.final-line {
+  font-size: clamp(32px, 5vw, 72px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6em 0;
+  font-weight: 400;
   opacity: 0;
-  display: inline-block;
+  filter: blur(10px);
+  transform: translateY(20px);
 }
 
-.final-sub {
-  font-size: clamp(20px, 2.5vw, 32px);
-  margin-bottom: 80px;
-  font-family: "TRY Tosh B Medium", sans-serif;
+.final-line--small {
+  font-size: clamp(20px, 3vw, 36px);
+  color: #444;
+}
+
+.final-reveal {
+  font-size: clamp(48px, 8vw, 130px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.2em 0;
+  font-weight: 400;
+}
+
+.final-reveal .word {
+  display: inline-block;
+  opacity: 0;
 }
 
 /* FORM */
-.form {
-  margin-top: 40px;
+.form { margin-top: 60px; }
+.form-note {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 30px;
+  opacity: 0;
+  letter-spacing: 0.02em;
 }
-
 .form-row {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 28px;
-  opacity: 0; /* Hidden initially */
+  gap: 24px;
+  opacity: 0;
 }
-
 .form input {
   border: none;
   border-bottom: 1px solid #aaa;
   padding: 12px 4px;
-  width: 260px;
+  width: 240px;
   max-width: 100%;
   background: transparent;
   font-family: inherit;
@@ -245,10 +221,8 @@ body {
   outline: none;
   transition: border-color 0.3s ease;
 }
-
 .form input::placeholder { color: #999; }
 .form input:focus { border-bottom-color: #111; }
-
 .form button {
   border: none;
   border-bottom: 1px solid #111;
@@ -260,23 +234,9 @@ body {
   font-size: 15px;
   color: #111;
   position: relative;
+  transition: opacity 0.25s ease;
 }
-
-.form button::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 1px;
-  background: #111;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.35s ease;
-}
-
-.form button:hover::after { transform: scaleX(1); }
-
+.form button:hover { opacity: 0.7; }
 .form-success {
   display: none;
   font-size: 16px;
@@ -285,19 +245,35 @@ body {
 }
 
 .footer {
-  margin-top: 100px;
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  margin-top: clamp(60px, 8vh, 100px);
+  font-size: 11px;
+  letter-spacing: 0.06em;
   color: #999;
-  text-align: center;
+  text-transform: uppercase;
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .vertical-progress-container { right: 20px; height: 40vh; }
-  .intro-content { width: 90%; padding-left: 20px; }
-  .form-row { flex-direction: column; align-items: stretch; gap: 20px; max-width: 300px; margin: 0 auto; }
+@media (max-width: 640px) {
+  .vp-text-wrapper { width: 75%; padding: 15vh 24px 25vh; }
+  .vp-progress-track { width: 25%; }
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    max-width: 280px;
+    margin: 0 auto;
+  }
   .form input { width: 100%; text-align: center; }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .logo img, .tagline { opacity: 1 !important; }
+  .vp-heading .word, .final-reveal .word { opacity: 1 !important; }
+  .vp-progress-fill { height: 100% !important; }
+  .marquee-track { animation: none; }
+  .dossier-title, .dossier-sub, .form-note, .form-row { opacity: 1 !important; transform: none !important; }
+  .final-line { opacity: 1 !important; filter: none !important; transform: none !important; }
 }
 </style>
 </head>
@@ -309,58 +285,69 @@ body {
   <div class="logo">
     <img src="logo.png" alt="findandalign" />
   </div>
-  <div class="tagline">The structural intelligence behind your decisions.</div>
-  <div class="scroll-indicator"></div>
+  <div class="tagline">Symbolic Intelligence for Alignment</div>
 </section>
 
-<!-- PINNED INTRO (Huge Text + Vertical Line) -->
-<section class="pinned-intro">
-  <div class="intro-content">
-    <h2 class="huge-text split-huge">
-      You’ve done the work. You recognize your patterns. You’ve analyzed your contradictions. But recognition isn’t structure. And without structure, patterns don’t resolve. High-stakes decisions are still being shaped by forces that remain unseen.
-    </h2>
+<!-- VERTICAL PROGRESS SECTION -->
+<section class="vp-section">
+  <div class="vp-text-wrapper">
+    <h2 class="vp-heading">You've done the work. You recognize your patterns.</h2>
+    <h2 class="vp-heading">You've analyzed your contradictions.</h2>
+    <h2 class="vp-heading">But recognition isn't structure. And without structure, patterns don't resolve.</h2>
+    <h2 class="vp-heading">High-stakes decisions are still being shaped by forces that remain unseen.</h2>
   </div>
-  <div class="vertical-progress-container">
-    <div class="vertical-progress-fill"></div>
+  <div class="vp-progress-track">
+    <div class="vp-progress-line-bg">
+      <div class="vp-progress-fill"></div>
+    </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
+<!-- MARQUEE SECTION -->
 <section class="marquee-section">
   <div class="marquee-track">
-    <span class="marquee-text">This is not therapy. It is not a personality assessment. This is not therapy. It is not a personality assessment. This is not therapy. It is not a personality assessment. This is not therapy. It is not a personality assessment.</span>
-    <span class="marquee-text">This is not therapy. It is not a personality assessment. This is not therapy. It is not a personality assessment. This is not therapy. It is not a personality assessment. This is not therapy. It is not a personality assessment.</span>
+    <div class="marquee-content">
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+    </div>
+    <div class="marquee-content">
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+      <span>THIS IS NOT THERAPY. IT IS NOT A PERSONALITY ASSESSMENT. </span>
+    </div>
   </div>
 </section>
 
-<!-- ORIGIN DOSSIER -->
+<!-- DOSSIER SECTION -->
 <section class="dossier-section">
-  <div class="dossier-headline">
-    findandalign constructs a precise map of your cognitive, behavioral, and timing architecture — <strong>an Origin Dossier.</strong>
-  </div>
-  <div class="dossier-body">
-    A baseline schematic of how you process pressure, where conflict originates, and when it intensifies. By integrating converging systems of pattern intelligence, it translates hidden drivers into something you can observe, track, and work with directly.
-  </div>
+  <h2 class="dossier-title">findandalign constructs a precise map of your cognitive, behavioral, and timing architecture — an Origin Dossier.</h2>
+  <p class="dossier-sub">A baseline schematic of how you process pressure, where conflict originates, and when it intensifies. By integrating converging systems of pattern intelligence, it translates hidden drivers into something you can observe, track, and work with directly.</p>
 </section>
 
 <!-- FINAL SECTION -->
 <section class="final-section">
-  <h2 class="final-huge split-final">Not for everyone.</h2>
-  <div class="final-sub">Access is limited by design.</div>
+  <div class="final-line">It doesn't put you in a box.</div>
+  <div class="final-line">It reveals where misalignment is costing you —<br>and where leverage actually exists.</div>
+  <div class="final-line final-line--small">An Origin Dossier.<br>An Alignment layer.</div>
+  <h2 class="final-reveal">Not for everyone.</h2>
+  <p class="final-reveal final-line final-line--small">Access is limited by design.</p>
 
   <div class="form">
+    <p class="form-note">Request access to the first cohort.</p>
     <div class="form-row">
       <input type="email" placeholder="Enter your email" aria-label="Email address"/>
       <button type="button">Apply for Access</button>
     </div>
-    <p class="form-success">Thank you — we’ll be in touch.</p>
+    <p class="form-success">Thank you — we'll be in touch.</p>
   </div>
 
   <div class="footer">in development — 2026</div>
 </section>
 
-
-<!-- GSAP -->
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/bundled/lenis.min.js"></script>
@@ -372,93 +359,105 @@ const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").mat
 
 if (!prefersReduced) {
   /* SMOOTH SCROLL */
-  const lenis = new Lenis({ lerp: 0.09 });
+  const lenis = new Lenis({ lerp: 0.08 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  /* HERO ANIMATION */
-  gsap.fromTo(".logo img", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
-  gsap.to(".tagline", { opacity: 0.8, duration: 1, delay: 0.4, ease: "power2.out" });
-  gsap.to(".scroll-indicator", { opacity: 1, duration: 0.8, delay: 0.9 });
+  /* HERO */
+  gsap.fromTo(".logo img", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
+  gsap.to(".tagline", { opacity: 1, duration: 1, delay: 0.4, ease: "power2.out" });
 
-  /* WORD SPLIT HELPER */
+  /* VERTICAL PROGRESS LINE */
+  gsap.to(".vp-progress-fill", {
+    height: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".vp-section",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.5
+    }
+  });
+
+  /* WORD SPLIT UTILITY */
   function splitWords(el) {
     const words = el.innerText.trim().split(/\s+/);
     el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
     return el.querySelectorAll(".word");
   }
 
-  /* PINNED INTRO ANIMATION */
-  // 1. Split text
-  const hugeTextEl = document.querySelector(".split-huge");
-  const hugeWords = splitWords(hugeTextEl);
-
-  // 2. Create Timeline
-  const introTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".pinned-intro",
-      start: "top top",
-      end: "+=200%", // Scroll distance
-      scrub: 0.5,
-      pin: true,
-      anticipatePin: 1
-    }
+  /* VP TEXT - WORD BY WORD REVEAL (NO GREY STATE) */
+  document.querySelectorAll(".vp-heading").forEach(el => {
+    const words = splitWords(el);
+    gsap.to(words, {
+      opacity: 1,
+      stagger: 0.04,
+      ease: "none",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        end: "top 25%",
+        scrub: 0.5
+      }
+    });
   });
 
-  // 3. Animate Vertical Line
-  introTl.to(".vertical-progress-fill", {
-    scaleY: 1,
-    ease: "none"
-  }, 0);
+  /* DOSSIER FADE IN */
+  gsap.to(".dossier-title", {
+    opacity: 1, y: 0, duration: 1, ease: "power2.out",
+    scrollTrigger: { trigger: ".dossier-section", start: "top 75%", toggleActions: "play none none none" }
+  });
+  gsap.to(".dossier-sub", {
+    opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power2.out",
+    scrollTrigger: { trigger: ".dossier-section", start: "top 75%", toggleActions: "play none none none" }
+  });
 
-  // 4. Animate Words (Opacity 0.1 -> 1) and slight upward movement
-  introTl.to(hugeWords, {
-    opacity: 1,
-    stagger: 0.05,
-    ease: "none"
-  }, 0);
+  /* FINAL SECTION - BLUR/FADE SEQUENCE */
+  const finalLines = document.querySelectorAll(".final-line");
   
-  // Move the whole text block up slightly as we scroll
-  introTl.to(".intro-content", {
-    y: "-15%",
-    ease: "none"
-  }, 0);
-
-
-  /* FINAL SECTION ANIMATION (Not for everyone) */
-  const finalHugeEl = document.querySelector(".split-final");
-  const finalWords = splitWords(finalHugeEl);
-
-  gsap.to(finalWords, {
-    opacity: 1,
-    stagger: 0.1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".final-section",
-      start: "top 70%",
-      toggleActions: "play none none none"
+  finalLines.forEach((line, index) => {
+    gsap.to(line, {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: line,
+        start: "top 75%",
+        toggleActions: "play none none none"
+      }
+    });
+    
+    // Blur out previous lines
+    if (index > 0) {
+      gsap.to(finalLines[index - 1], {
+        opacity: 0.15,
+        filter: "blur(8px)",
+        duration: 1,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: line,
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      });
     }
   });
 
   /* FORM REVEAL */
-  gsap.to(".form-row", {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".form",
-      start: "top 85%",
-      toggleActions: "play none none none"
-    }
+  gsap.to(".form-note", {
+    opacity: 1, duration: 0.8, ease: "power2.out",
+    scrollTrigger: { trigger: ".form", start: "top 85%", toggleActions: "play none none none" }
   });
+  gsap.fromTo(".form-row",
+    { opacity: 0, y: 12 },
+    { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: "power2.out",
+      scrollTrigger: { trigger: ".form", start: "top 85%", toggleActions: "play none none none" } });
 
 } else {
-  // Reduced motion fallbacks
-  gsap.set(".word", { opacity: 1 });
   gsap.set(".form-row", { opacity: 1 });
-  gsap.set(".vertical-progress-fill", { scaleY: 1 });
 }
 
 /* FORM BEHAVIOUR */
@@ -475,6 +474,7 @@ button.addEventListener("click", () => {
     return;
   }
   formRow.style.display = "none";
+  document.querySelector(".form-note").style.display = "none";
   const success = document.querySelector(".form-success");
   success.style.display = "block";
   gsap.fromTo(success, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
