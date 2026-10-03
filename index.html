@@ -46,61 +46,74 @@ body {
 
 /* VERTICAL PROGRESS SECTION */
 .vp-section {
+  position: relative;
+  height: 400vh;
+}
+
+.vp-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
-  min-height: 250vh;
+  overflow: hidden;
+}
+
+.vp-text-container {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 6vw;
   position: relative;
 }
 
-.vp-text-wrapper {
-  width: 85%;
-  padding: 20vh 5vw 30vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
 .vp-heading {
-  font-size: clamp(42px, 6.5vw, 110px);
-  line-height: 1.05;
+  position: absolute;
+  top: 50%;
+  left: 6vw;
+  transform: translateY(100%);
+  width: 80%;
+  font-size: clamp(40px, 5.5vw, 90px);
+  line-height: 1.1;
   font-weight: 400;
-  margin: 0 0 1.2em 0;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: #111;
+  opacity: 0;
 }
 
 .vp-heading .word {
   display: inline-block;
-  opacity: 0; /* Start completely invisible */
+  opacity: 0;
 }
 
 .vp-progress-track {
   width: 15%;
-  height: 100vh;
-  position: sticky;
-  top: 0;
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: stretch;
-  padding: 20vh 0;
+  align-items: center;
 }
 
-.vp-progress-line-bg {
+.vp-progress-line {
   width: 1px;
+  height: 40vh;
   background: #e0e0e0;
   position: relative;
-  flex-grow: 1;
 }
 
 .vp-progress-fill {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  background: #111;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 0%;
+  background: #111;
 }
 
 /* MARQUEE SECTION */
 .marquee-section {
-  padding: 6vh 0;
+  padding: 4vh 0;
   overflow: hidden;
   background: #f7f7f7;
 }
@@ -108,18 +121,19 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 .marquee-content {
   display: flex;
   white-space: nowrap;
-  font-family: "TRY Tosh B Medium", sans-serif;
-  font-size: clamp(14px, 1.8vw, 24px); /* Smaller text */
-  letter-spacing: 0.04em;
+  font-family: "TRY Tosh A", sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1.4vw, 18px);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding-right: 2rem;
-  color: #888; /* Faded grey */
+  padding-right: 3rem;
+  color: #aaa;
 }
 
 @keyframes marquee {
@@ -129,62 +143,84 @@ body {
 
 /* DOSSIER SECTION */
 .dossier-section {
-  padding: clamp(120px, 15vh, 180px) 24px;
+  padding: clamp(100px, 12vh, 160px) 24px;
   text-align: center;
   max-width: 900px;
   margin: 0 auto;
 }
 
 .dossier-title {
-  font-size: clamp(24px, 3vw, 42px);
-  line-height: 1.3;
+  font-size: clamp(22px, 2.8vw, 38px);
+  line-height: 1.35;
   font-weight: 400;
   letter-spacing: -0.01em;
-  margin: 0 0 40px 0;
+  margin: 0 0 36px 0;
   opacity: 0;
   transform: translateY(20px);
 }
 
 .dossier-sub {
-  font-size: clamp(15px, 1.4vw, 18px);
-  line-height: 1.6;
-  color: #444;
-  max-width: 650px;
+  font-size: clamp(14px, 1.3vw, 17px);
+  line-height: 1.65;
+  color: #555;
+  max-width: 620px;
   margin: 0 auto;
   opacity: 0;
   transform: translateY(20px);
 }
 
-/* FINAL SECTION - BLUR/FADE TRANSITIONS */
+/* FINAL SECTION */
 .final-section {
-  padding: clamp(100px, 15vh, 160px) 24px clamp(60px, 10vh, 100px);
+  position: relative;
+  height: 500vh;
+}
+
+.final-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.final-stack {
+  position: relative;
+  width: 100%;
   max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
+  height: 200px;
+  margin-bottom: 60px;
 }
 
 .final-line {
-  font-size: clamp(32px, 5vw, 72px);
-  line-height: 1.15;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  font-size: clamp(32px, 4.5vw, 64px);
+  line-height: 1.2;
   letter-spacing: -0.02em;
-  margin: 0 0 0.6em 0;
   font-weight: 400;
   opacity: 0;
-  filter: blur(10px);
-  transform: translateY(20px);
+  filter: blur(12px);
 }
 
 .final-line--small {
-  font-size: clamp(20px, 3vw, 36px);
-  color: #444;
+  font-size: clamp(20px, 2.8vw, 36px);
+  color: #555;
 }
 
 .final-reveal {
-  font-size: clamp(48px, 8vw, 130px);
+  font-size: clamp(44px, 7vw, 110px);
   line-height: 1.05;
   letter-spacing: -0.03em;
-  margin: 0 0 0.2em 0;
   font-weight: 400;
+  text-align: center;
+  margin: 0 0 20px 0;
 }
 
 .final-reveal .word {
@@ -192,12 +228,19 @@ body {
   opacity: 0;
 }
 
+.final-sub {
+  font-size: clamp(18px, 2.4vw, 32px);
+  color: #555;
+  text-align: center;
+  opacity: 0;
+}
+
 /* FORM */
-.form { margin-top: 60px; }
+.form { margin-top: 80px; }
 .form-note {
   font-size: 14px;
   color: #666;
-  margin: 0 0 30px;
+  margin: 0 0 28px;
   opacity: 0;
   letter-spacing: 0.02em;
 }
@@ -233,7 +276,6 @@ body {
   font-family: inherit;
   font-size: 15px;
   color: #111;
-  position: relative;
   transition: opacity 0.25s ease;
 }
 .form button:hover { opacity: 0.7; }
@@ -250,12 +292,14 @@ body {
   letter-spacing: 0.06em;
   color: #999;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* MOBILE */
 @media (max-width: 640px) {
-  .vp-text-wrapper { width: 75%; padding: 15vh 24px 25vh; }
-  .vp-progress-track { width: 25%; }
+  .vp-text-container { padding-left: 24px; }
+  .vp-heading { left: 24px; width: 75%; font-size: clamp(32px, 8vw, 48px); }
+  .final-stack { height: 180px; }
   .form-row {
     flex-direction: column;
     align-items: stretch;
@@ -269,11 +313,14 @@ body {
 /* REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {
   .logo img, .tagline { opacity: 1 !important; }
-  .vp-heading .word, .final-reveal .word { opacity: 1 !important; }
+  .vp-heading { opacity: 1 !important; transform: translateY(0) !important; }
+  .vp-heading .word { opacity: 1 !important; }
   .vp-progress-fill { height: 100% !important; }
   .marquee-track { animation: none; }
-  .dossier-title, .dossier-sub, .form-note, .form-row { opacity: 1 !important; transform: none !important; }
-  .final-line { opacity: 1 !important; filter: none !important; transform: none !important; }
+  .dossier-title, .dossier-sub { opacity: 1 !important; transform: none !important; }
+  .final-line { opacity: 1 !important; filter: none !important; }
+  .final-reveal .word { opacity: 1 !important; }
+  .final-sub, .form-note, .form-row { opacity: 1 !important; }
 }
 </style>
 </head>
@@ -290,15 +337,17 @@ body {
 
 <!-- VERTICAL PROGRESS SECTION -->
 <section class="vp-section">
-  <div class="vp-text-wrapper">
-    <h2 class="vp-heading">You've done the work. You recognize your patterns.</h2>
-    <h2 class="vp-heading">You've analyzed your contradictions.</h2>
-    <h2 class="vp-heading">But recognition isn't structure. And without structure, patterns don't resolve.</h2>
-    <h2 class="vp-heading">High-stakes decisions are still being shaped by forces that remain unseen.</h2>
-  </div>
-  <div class="vp-progress-track">
-    <div class="vp-progress-line-bg">
-      <div class="vp-progress-fill"></div>
+  <div class="vp-sticky">
+    <div class="vp-text-container">
+      <h2 class="vp-heading" data-index="0">You've done the work. You recognize your patterns.</h2>
+      <h2 class="vp-heading" data-index="1">You've analyzed your contradictions.</h2>
+      <h2 class="vp-heading" data-index="2">But recognition isn't structure. And without structure, patterns don't resolve.</h2>
+      <h2 class="vp-heading" data-index="3">High-stakes decisions are still being shaped by forces that remain unseen.</h2>
+    </div>
+    <div class="vp-progress-track">
+      <div class="vp-progress-line">
+        <div class="vp-progress-fill"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -329,22 +378,27 @@ body {
 
 <!-- FINAL SECTION -->
 <section class="final-section">
-  <div class="final-line">It doesn't put you in a box.</div>
-  <div class="final-line">It reveals where misalignment is costing you —<br>and where leverage actually exists.</div>
-  <div class="final-line final-line--small">An Origin Dossier.<br>An Alignment layer.</div>
-  <h2 class="final-reveal">Not for everyone.</h2>
-  <p class="final-reveal final-line final-line--small">Access is limited by design.</p>
-
-  <div class="form">
-    <p class="form-note">Request access to the first cohort.</p>
-    <div class="form-row">
-      <input type="email" placeholder="Enter your email" aria-label="Email address"/>
-      <button type="button">Apply for Access</button>
+  <div class="final-sticky">
+    <div class="final-stack">
+      <div class="final-line" data-final="0">It doesn't put you in a box.</div>
+      <div class="final-line" data-final="1">It reveals where misalignment is costing you — and where leverage actually exists.</div>
+      <div class="final-line final-line--small" data-final="2">An Origin Dossier. An Alignment layer.</div>
     </div>
-    <p class="form-success">Thank you — we'll be in touch.</p>
-  </div>
+    
+    <h2 class="final-reveal">Not for everyone.</h2>
+    <p class="final-sub">Access is limited by design.</p>
 
-  <div class="footer">in development — 2026</div>
+    <div class="form">
+      <p class="form-note">Request access to the first cohort.</p>
+      <div class="form-row">
+        <input type="email" placeholder="Enter your email" aria-label="Email address"/>
+        <button type="button">Apply for Access</button>
+      </div>
+      <p class="form-success">Thank you — we'll be in touch.</p>
+    </div>
+
+    <div class="footer">in development — 2026</div>
+  </div>
 </section>
 
 <!-- SCRIPTS -->
@@ -368,10 +422,17 @@ if (!prefersReduced) {
   gsap.fromTo(".logo img", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
   gsap.to(".tagline", { opacity: 1, duration: 1, delay: 0.4, ease: "power2.out" });
 
-  /* VERTICAL PROGRESS LINE */
-  gsap.to(".vp-progress-fill", {
-    height: "100%",
-    ease: "none",
+  /* VERTICAL PROGRESS SECTION */
+  const headings = gsap.utils.toArray(".vp-heading");
+  
+  // Split words for each heading
+  headings.forEach(heading => {
+    const words = heading.innerText.trim().split(/\s+/);
+    heading.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+  });
+
+  // Main timeline for VP section
+  const vpTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".vp-section",
       start: "top top",
@@ -380,27 +441,40 @@ if (!prefersReduced) {
     }
   });
 
-  /* WORD SPLIT UTILITY */
-  function splitWords(el) {
-    const words = el.innerText.trim().split(/\s+/);
-    el.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
-    return el.querySelectorAll(".word");
-  }
+  // Progress bar fills throughout
+  vpTl.to(".vp-progress-fill", { height: "100%", duration: 1, ease: "none" }, 0);
 
-  /* VP TEXT - WORD BY WORD REVEAL (NO GREY STATE) */
-  document.querySelectorAll(".vp-heading").forEach(el => {
-    const words = splitWords(el);
-    gsap.to(words, {
+  // Each heading slides up and reveals words
+  headings.forEach((heading, i) => {
+    const words = heading.querySelectorAll(".word");
+    const startTime = i * 0.2;
+    const duration = 0.2;
+    
+    // Slide up and fade in
+    vpTl.to(heading, {
       opacity: 1,
-      stagger: 0.04,
-      ease: "none",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        end: "top 25%",
-        scrub: 0.5
-      }
-    });
+      y: 0,
+      duration: duration,
+      ease: "power2.out"
+    }, startTime);
+    
+    // Word reveal
+    vpTl.to(words, {
+      opacity: 1,
+      stagger: 0.02,
+      duration: duration * 0.8,
+      ease: "none"
+    }, startTime + 0.05);
+    
+    // Slide out (except last)
+    if (i < headings.length - 1) {
+      vpTl.to(heading, {
+        opacity: 0,
+        y: "-100%",
+        duration: duration,
+        ease: "power2.in"
+      }, startTime + duration + 0.05);
+    }
   });
 
   /* DOSSIER FADE IN */
@@ -413,38 +487,64 @@ if (!prefersReduced) {
     scrollTrigger: { trigger: ".dossier-section", start: "top 75%", toggleActions: "play none none none" }
   });
 
-  /* FINAL SECTION - BLUR/FADE SEQUENCE */
-  const finalLines = document.querySelectorAll(".final-line");
+  /* FINAL SECTION */
+  const finalLines = gsap.utils.toArray(".final-line[data-final]");
   
-  finalLines.forEach((line, index) => {
-    gsap.to(line, {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: line,
-        start: "top 75%",
-        toggleActions: "play none none none"
-      }
-    });
-    
-    // Blur out previous lines
-    if (index > 0) {
-      gsap.to(finalLines[index - 1], {
-        opacity: 0.15,
-        filter: "blur(8px)",
-        duration: 1,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: line,
-          start: "top 75%",
-          toggleActions: "play none none none"
-        }
-      });
+  // Split "Not for everyone" into words
+  const notForEveryone = document.querySelector(".final-reveal");
+  const words = notForEveryone.innerText.trim().split(/\s+/);
+  notForEveryone.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+  const revealWords = notForEveryone.querySelectorAll(".word");
+
+  // Timeline for final section
+  const finalTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".final-section",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.5
     }
   });
+
+  // Cycle through final lines
+  finalLines.forEach((line, i) => {
+    const startTime = i * 0.15;
+    const duration = 0.12;
+    
+    // Fade in
+    finalTl.to(line, {
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: duration,
+      ease: "power2.out"
+    }, startTime);
+    
+    // Fade out (except last)
+    if (i < finalLines.length - 1) {
+      finalTl.to(line, {
+        opacity: 0,
+        filter: "blur(12px)",
+        duration: duration,
+        ease: "power2.in"
+      }, startTime + duration + 0.03);
+    }
+  });
+
+  // Reveal "Not for everyone" word by word
+  const notStartTime = finalLines.length * 0.15;
+  finalTl.to(revealWords, {
+    opacity: 1,
+    stagger: 0.03,
+    duration: 0.15,
+    ease: "power2.out"
+  }, notStartTime);
+
+  // Reveal "Access is limited by design"
+  finalTl.to(".final-sub", {
+    opacity: 1,
+    duration: 0.12,
+    ease: "power2.out"
+  }, notStartTime + 0.15);
 
   /* FORM REVEAL */
   gsap.to(".form-note", {
